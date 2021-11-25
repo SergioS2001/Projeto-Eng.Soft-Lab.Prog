@@ -1,0 +1,43 @@
+body{
+
+background-image: url(https://th.bing.com/th/id/R.74d5753b1547e38c897bd3ca2b04304d?rik=7tcVi7GX3bWeEg&pid=ImgRaw&r=0);
+background-repeat: no-repeat;
+background-attachment: fixed;
+background-size: cover;
+
+}
+.Regis_log_form{
+background-color: white;
+border-color: black;
+align-self: center;
+margin-left: 25ch;
+margin-bottom: 25ch;
+margin-top: 5ch;
+margin-right: 25ch;
+
+}
+
+.Title{
+    font-size: x-large;
+    text-align: center;
+
+}
+p{
+    font-family: 'Times New Roman', Times, serif;
+    text-align: justify;
+    font-size: 20px;
+    margin-left: 2ch;
+}
+.Subtitle{
+    font-size: large;
+    text-align: center;
+
+
+}
+.submitt{
+
+    text-align: center;
+
+
+
+}
