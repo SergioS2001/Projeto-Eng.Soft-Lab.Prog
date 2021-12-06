@@ -1,4 +1,5 @@
 @extends('Layout.Model')
+
 @section('Title')
 Registo
 @endsection
@@ -10,8 +11,8 @@ Registo
     </h1>
 
     <div class="row">
-        <form class="col s12" action ="" method="post" >
-
+        <form class="col s12" action ="/Utilizador" method="post" >
+            {{ csrf_field() }}
           <div class="row">
             <div class="input-field col s12">
                 <em class="material-icons prefix">email</em>
@@ -60,8 +61,8 @@ Registo
 
         </form>
         <div class="Subtitle">
-        <a href="Login.html" >Login in</a>
-      </div>
+            <a href="{{url('/logI' )}}" class="Subtitle" >Log In</a>
+            </div>
 
 
 

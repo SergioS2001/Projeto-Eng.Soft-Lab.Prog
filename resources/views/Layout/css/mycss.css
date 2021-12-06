@@ -4,9 +4,9 @@ background-image: url(https://th.bing.com/th/id/R.74d5753b1547e38c897bd3ca2b0430
 background-repeat: no-repeat;
 background-attachment: fixed;
 background-size: cover;
- display: flex;
-    min-height: 100vh;
-    flex-direction: column;
+display: flex;
+min-height: 100vh;
+flex-direction: column;
 
 }
 .Regis_log_form{
