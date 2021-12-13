@@ -36,7 +36,7 @@ class SalaController extends Controller
      */
     public function store(Request $request)
     {
-        $v = Validator::make([], []);
+      //  $v = Validator::make([], []);
         $request->validate([
         'id_edificio' => 'required|exists:edificios,id',
         'Piso_min' => 'required|integer',
