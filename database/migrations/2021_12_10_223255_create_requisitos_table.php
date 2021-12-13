@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRequisicaosTable extends Migration
+class CreateRequisitosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateRequisicaosTable extends Migration
      */
     public function up()
     {
-        Schema::create('requisicaos', function (Blueprint $table) {
+        Schema::create('requisitos', function (Blueprint $table) {
             $table->id()->autoIncrement();
             $table->unsignedBigInteger('id_Sala');
             $table->foreign('id_Sala')->references('id')->on('salas')->cascadeOnUpdate()->cascadeOnDelete();
             $table->unsignedBigInteger('id_Utilizador');
-            $table->foreign('id_Utilizador')->references('id')->on('utilizadors')->cascadeOnUpdate();
-        $table->dateTime('date_in');
+            $table->foreign('id_Utilizador')->references('id')->on('utilizadors')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->dateTime('date_in');
+            $table->dateTime('date_out');
             $table->timestamps();
         });
     }
@@ -31,6 +32,6 @@ class CreateRequisicaosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('requisicaos');
+        Schema::dropIfExists('requisitos');
     }
 }

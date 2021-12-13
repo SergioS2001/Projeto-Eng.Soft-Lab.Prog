@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Aluno;
+use App\Models\Requisito;
 use Illuminate\Http\Request;
 
-class AlunoController extends Controller
+class RequisitoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class AlunoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Aluno  $aluno
+     * @param  \App\Models\Requisito  $requisito
      * @return \Illuminate\Http\Response
      */
-    public function show(Aluno $aluno)
+    public function show(Requisito $requisito)
     {
         //
     }
@@ -52,10 +52,10 @@ class AlunoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Aluno  $aluno
+     * @param  \App\Models\Requisito  $requisito
      * @return \Illuminate\Http\Response
      */
-    public function edit(Aluno $aluno)
+    public function edit(Requisito $requisito)
     {
         //
     }
@@ -64,10 +64,10 @@ class AlunoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Aluno  $aluno
+     * @param  \App\Models\Requisito  $requisito
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Aluno $aluno)
+    public function update(Request $request, Requisito $requisito)
     {
         //
     }
@@ -75,10 +75,10 @@ class AlunoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Aluno  $aluno
+     * @param  \App\Models\Requisito  $requisito
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Aluno $aluno)
+    public function destroy(Requisito $requisito)
     {
         //
     }

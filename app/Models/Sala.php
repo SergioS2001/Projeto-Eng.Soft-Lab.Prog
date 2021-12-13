@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Sala extends Model
 {
     use HasFactory;
+    public function Requisitos()
+    {
+    	return $this->hasMany(Requisito::class);
+    }
+    public function Edificios()
+    {
+    	return $this->belongsTo(Edificio::class);
+    }
 }

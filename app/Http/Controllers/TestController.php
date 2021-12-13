@@ -1,8 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Http\Controllers\SalaController;
-use App\Models\Sala;
+
 use Illuminate\Http\Request;
 
 class TestController extends Controller
@@ -24,5 +23,4 @@ class TestController extends Controller
         return view('Main');
 
     }
-
 }

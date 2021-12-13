@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEdificiosTable extends Migration
+class CreateUtilizadorPriviligiadosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateEdificiosTable extends Migration
      */
     public function up()
     {
-        Schema::create('edificios', function (Blueprint $table) {
+        Schema::create('utilizador__priviligiados', function (Blueprint $table) {
             $table->id()->autoIncrement();
-            $table->string('Nome');
-            $table->integer('Piso')->default(0);
-            $table->string('Morada');
+            $table->unsignedBigInteger('id_Utilizador');
+            $table->foreign('id_Utilizador')->references('id')->on('utilizadors')->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateEdificiosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('edificios');
+        Schema::dropIfExists('utilizador__priviligiados');
     }
 }

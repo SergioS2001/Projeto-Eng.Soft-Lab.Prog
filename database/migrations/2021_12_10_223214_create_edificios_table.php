@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDocentesTable extends Migration
+class CreateEdificiosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class CreateDocentesTable extends Migration
      */
     public function up()
     {
-        Schema::create('docentes', function (Blueprint $table) {
+        Schema::create('edificios', function (Blueprint $table) {
             $table->id()->autoIncrement();
+            $table->string('Nome');
+            $table->integer('Piso_min')->default(0);
+            $table->integer('Piso_max')->default(0);
+            $table->string('Morada');
             $table->timestamps();
         });
     }
@@ -26,6 +30,6 @@ class CreateDocentesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('docentes');
+        Schema::dropIfExists('edificios');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUtilizadorsTable extends Migration
+class CreateAdminsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateUtilizadorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('utilizadors', function (Blueprint $table) {
+        Schema::create('admins', function (Blueprint $table) {
             $table->id()->autoIncrement();
-            $table->string('Nome',64);
-            $table->string('Type');
-            $table->string('Email')->unique();
-            $table->string('Password');
+            $table->unsignedBigInteger('id_Utilizador_Priviliagiado');
+            $table->foreign('id_Utilizador_Priviliagiado')->references('id')->on('utilizador__priviligiados')->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class CreateUtilizadorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('utilizadors');
+        Schema::dropIfExists('admins');
     }
 }

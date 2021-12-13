@@ -1,4 +1,4 @@
-@extends('Layout.Model')
+@extends('Layouts.Model')
 
 @section('Title')
 Salas
@@ -9,16 +9,14 @@ Salas
     <h1 class= "Title">
     Salas
     </h1>
-
     <ul class="list-group">
-        @forelse($Sala as $Sala)
+        @forelse($salas as $sala)
         <li class="list-group-item">
-            <h5>{{$Sala->id}} - {{$Sala->}} - {{$student->lastName}}</h5>
+            <h5>{{$sala->id}} - {{$sala->Area}} - {{$sala->Piso}}- {{$sala->id_edificio}}</h5>
         </li>
         @empty
-        <h5 class="text-center">No Students Found!</h5>
+
+        <h5 class="text-center">No Salas Found!</h5>
         @endforelse
     </ul>
-
-</div>
 @endsection

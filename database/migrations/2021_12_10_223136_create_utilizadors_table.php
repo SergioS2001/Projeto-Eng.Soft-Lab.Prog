@@ -3,8 +3,9 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use phpDocumentor\Reflection\PseudoTypes\False_;
 
-class CreateAlunosTable extends Migration
+class CreateUtilizadorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +14,13 @@ class CreateAlunosTable extends Migration
      */
     public function up()
     {
-        Schema::create('alunos', function (Blueprint $table) {
+        Schema::create('utilizadors', function (Blueprint $table) {
             $table->id()->autoIncrement();
+            $table->string('Nome',64);
+            $table->string('Type');
+            $table->string('Email')->unique();
+            $table->dateTime('Email_veri')->nullable()->default(null);
+            $table->string('Password');
             $table->timestamps();
         });
     }
@@ -26,6 +32,6 @@ class CreateAlunosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('alunos');
+        Schema::dropIfExists('utilizadors');
     }
 }

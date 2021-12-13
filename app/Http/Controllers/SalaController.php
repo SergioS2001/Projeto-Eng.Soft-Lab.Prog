@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Sala;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Validator;
 class SalaController extends Controller
 {
     /**
@@ -14,7 +14,8 @@ class SalaController extends Controller
      */
     public function index()
     {
-        //
+        $salas = Sala::all();
+        return view('Main', ['salas' => $salas]);
     }
 
     /**
@@ -35,7 +36,20 @@ class SalaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $v = Validator::make([], []);
+        $request->validate([
+        'id_edificio' => 'required|exists:edificios,id',
+        'Piso_min' => 'required|integer',
+        'Piso_max' => 'required|integer',
+        'Type' => 'required|string ',
+        'Descricao' => 'string',
+        'Re-password'=>'required|same:Password',
+    ]);
+
+
+
+
+
     }
 
     /**
@@ -80,6 +94,8 @@ class SalaController extends Controller
      */
     public function destroy(Sala $sala)
     {
-        //
+        $sala->delete();
+
+        return redirect('/Main')->withHeaders('Utilizador Delected');
     }
 }

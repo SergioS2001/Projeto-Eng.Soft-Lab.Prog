@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Requisicao extends Model
+class Utilizador_Priviligiado extends Model
 {
     use HasFactory;
 }

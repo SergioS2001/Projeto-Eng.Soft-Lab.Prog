@@ -5,16 +5,27 @@ body{
     background-attachment: fixed;
     background-size: cover;
 
-
     }
     .Regis_log_form{
-    background-color: white;
+    background-color: #dcdcdc;
     border-color: black;
     align-self: center;
-
-
-
+    margin-left: 20ch;
+    margin-bottom: 20ch;
+    margin-top: 5ch;
+    margin-right: 20ch;
+    border:orange;
+     border-width:5px;
+     border-style: double;
     }
+    .Regis_log_form_dux{
+        align-self: center;
+        margin-left: 2ch;
+        margin-bottom: 2ch;
+        margin-top: 2ch;
+        margin-right: 2ch;
+
+        }
 
     .Title{
         font-size: x-large;
@@ -40,6 +51,4 @@ body{
 
 
     }
-      main {
-        flex: 1 0 auto;
-      }
+
