@@ -8,10 +8,9 @@ body{
     }
     .Regis_log_form{
     background-color: #dcdcdc;
-    border-color: black;
     align-self: center;
     margin-left: 20ch;
-    margin-bottom: 20ch;
+    margin-bottom: 5ch;
     margin-top: 5ch;
     margin-right: 20ch;
     border:orange;
@@ -21,10 +20,8 @@ body{
     .Regis_log_form_dux{
         align-self: center;
         margin-left: 2ch;
-        margin-bottom: 2ch;
-        margin-top: 2ch;
+        margin-bottom: 100ch;
         margin-right: 2ch;
-
         }
 
     .Title{
@@ -50,5 +47,17 @@ body{
 
 
 
+    }
+    #left{
+
+        float:left;
+        text-align: center;
+        margin-left: 10ch;
+    }
+  #Right{
+
+         float:right;
+         text-align: center;
+         margin-right: 10ch;
     }
 

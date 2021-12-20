@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class EMAILVERIF
+class ISLog
 {
     /**
      * Handle an incoming request.
@@ -16,20 +16,11 @@ class EMAILVERIF
      */
     public function handle(Request $request, Closure $next)
     {
-$utilizadador=session()->get('utilizadors');
-if($utilizadador==null){
-return redirect()->back()->withErrors('Erro: Not Login');
+        if(session()->has('utilizadors')){
+            return $next($request);
 
+        }
+        return redirect('/Registo');
 
-}else{
-if($utilizadador->Email_veri!=null){
-
-    return $next($request);
-
-
-}
     }
-
-
-}
 }

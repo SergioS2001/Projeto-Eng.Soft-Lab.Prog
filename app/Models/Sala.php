@@ -8,6 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Sala extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'id_edificio',
+        'Piso',
+        'Type',
+        'Descricao',
+    ];
     public function Requisitos()
     {
     	return $this->hasMany(Requisito::class);

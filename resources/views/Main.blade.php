@@ -5,18 +5,66 @@ Salas
 @endsection
 
 @section('Content')
-<div class ="Regis_log_form">
-    <h1 class= "Title">
-    Salas
-    </h1>
-    <ul class="list-group">
-        @forelse($salas as $sala)
-        <li class="list-group-item">
-            <h5>{{$sala->id}} - {{$sala->Area}} - {{$sala->Piso}}- {{$sala->id_edificio}}</h5>
-        </li>
-        @empty
 
-        <h5 class="text-center">No Salas Found!</h5>
-        @endforelse
-    </ul>
+<div class ="Regis_log_form">
+
+    <div class ="Regis_log_form_dux">
+          <div id='left'>
+             Salas
+             <ul class="list-group">
+                <table>
+                    <caption>Tabela de Salas</caption>
+                 <thead>
+ <th id="id">ID</th>
+ <th id="Area">Area</th>
+ <th id="Piso">Piso</th>
+ <th id="id_edificio">id_edificio</th>
+
+ </thead>
+                 <tbody>
+
+                @forelse($salas as $sala)
+                <li class="list-group-item">
+                 <tr>
+                    <h5 class="Subtitle"><td>{{$sala->id}}</td><td>  {{$sala->Area}}</td><td>  {{$sala->Piso}} </td><td> {{$sala->id_edificio}}</td></h5>
+                 </tr>
+                 </li>
+                @empty
+
+                <h5 class="Subtitle">No Salas Found!</h5>
+                @endforelse
+                 </tbody>
+             </table>
+            </ul>
+        </div>
+            <div id="Right">
+                Edificios
+                <table>
+                    <caption>Tabela de Edificios</caption>
+                 <thead>
+        <th id="id">ID</th>
+        <th id="Nome">Nome</th>
+        <th id="Piso_Min">Piso_Min</th>
+        <th id="Piso_Max">Piso_Max</th>
+        <th id="Morada">Morada</th>
+        </thead>
+        <tbody>
+                       <ul class="list-group">
+                           @forelse($edificios as $edificio)
+                           <li class="list-group-item">
+        <tr>
+                               <h5 class="Subtitle"><td>{{$edificio->id}} </td><td> {{$edificio->Nome}} </td><td> {{$edificio->Piso_min}}</td><td> {{$edificio->Piso_max}}</td><td> {{$edificio->Morada}}</td></h5>
+        </tr>
+                            </li>
+                           @empty
+
+                           <h5 class="Subtitle">No Edificios Found!</h5>
+                           @endforelse
+                       </ul>
+
+        </tbody>
+                   </table>
+        </div>
+    </div>
+</div>
 @endsection

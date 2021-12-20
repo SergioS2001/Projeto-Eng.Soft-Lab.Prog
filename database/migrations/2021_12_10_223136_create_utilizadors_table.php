@@ -19,7 +19,6 @@ class CreateUtilizadorsTable extends Migration
             $table->string('Nome',64);
             $table->string('Type');
             $table->string('Email')->unique();
-            $table->dateTime('Email_veri')->nullable()->default(null);
             $table->string('Password');
             $table->timestamps();
         });

@@ -20,4 +20,5 @@ class Utilizador extends Model
     {
     	return $this->hasMany(Requisito::class);
     }
+
 }

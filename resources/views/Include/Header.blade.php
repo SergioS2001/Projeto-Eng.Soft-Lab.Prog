@@ -1,6 +1,15 @@
 
 <ul id="dropdown1" class="dropdown-content">
-    <li></li>
+    <li>  @if(session()->has('utilizadors'))
+
+        <?php
+            $util=session()->get('utilizadors');
+            echo '<a>'. $util->Nome.'</a>';
+            ?>
+
+
+
+        @endif</li>
     <li class="divider"></li>
     <li><a href="#!">two</a></li>
 

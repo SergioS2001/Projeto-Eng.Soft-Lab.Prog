@@ -9,7 +9,7 @@ Log In
     <h1 class= "Title">
    Log In Utilizador
     </h1>
-
+    <div class ="Regis_log_form_dux">
     <div class="row">
         <form class="col s12" action ="Utilizador/Log_In"method="post">
             {{ csrf_field() }}
@@ -30,6 +30,17 @@ Log In
             </div>
 
           </div>
+          @if (session()->has('popup'))
+          <div class="alert alert-danger">
+              <ul>
+
+              <?php  echo session()->get('popup');
+             session()->forget('popup');
+              ?>
+
+              </ul>
+          </div>
+      @endif
           @if ($errors->any())
           <div class="alert alert-danger">
               <ul>
@@ -59,6 +70,6 @@ Log In
 
 
       </div>
-
+    </div>
       </div>
 @endsection

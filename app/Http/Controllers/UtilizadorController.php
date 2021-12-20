@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 define("REMAIN", "/Main");
-
+define("REMAINADMIN", "/AdminMain");
 
 class UtilizadorController extends Controller
 {
@@ -35,6 +35,7 @@ class UtilizadorController extends Controller
      */
     public function create()
     {
+
         return view('Utilizador/create');
     }
 
@@ -64,8 +65,8 @@ class UtilizadorController extends Controller
         'Password.max'=> 'The Password field is is too long (>20).',
         'Re-password.required'=> 'The Re-Password field is Required.',
         ]);
-if(!($request->Nome== 'Aluno'||$request->Nome=='Docente'||$request->Nome=='Admin')){
-    $v->errors()->add('Type', 'Not Valid');
+if(!($request->Type== 'Aluno'||$request->Type=='Docente'||$request->Type=='Admin')){
+    $v->errors()->add('popup', 'Not Valid');
 
      redirect()->back()->withErrors($v);
 }
@@ -81,9 +82,13 @@ if(!($request->Nome== 'Aluno'||$request->Nome=='Docente'||$request->Nome=='Admin
          $Utilizador->save();
 
          session(['utilizadors' => $Utilizador]);
+         echo $Utilizador->Type;
+if( $Utilizador->Type =='Admin'){
 
-       $aux=REMAIN;
-       return redirect($aux);
+    return redirect(REMAINADMIN);
+}
+return redirect(REMAIN);
+
 
     }
 
@@ -107,18 +112,17 @@ if(!($request->Nome== 'Aluno'||$request->Nome=='Docente'||$request->Nome=='Admin
 
     $request->only( 'Email','Password');
     $Utilizador=DB::table('utilizadors')->where('Email',$request->Email)->first();
-    if($Utilizador==null){
-        return redirect()->back()->withErrors('ERRROOO');
-    }
-
-
-   if (Hash::check($request->Password, $Utilizador->Password) ) {
-
-
+    if($Utilizador!=null && Hash::check($request->Password, $Utilizador->Password)){
         session(['utilizadors' => $Utilizador]);
+        if( $Utilizador->Type=='Admin'){
 
-        return redirect('/Main');
-    }
+            return redirect(REMAINADMIN);
+        }
+        return(REMAIN);
+
+
+
+}
     return redirect()->back()->withErrors('ERRROOO');
 
     }
@@ -159,9 +163,9 @@ if(!($request->Nome== 'Aluno'||$request->Nome=='Docente'||$request->Nome=='Admin
         ]);
 
         $utilizador->update($request->all());
-        $aux=REMAIN;
 
-        return redirect($aux)->withHeaders('Successfull');
+
+        return redirect(REMAIN)->withHeaders('Successfull');
     }
 
     /**
@@ -173,7 +177,6 @@ if(!($request->Nome== 'Aluno'||$request->Nome=='Docente'||$request->Nome=='Admin
     public function destroy(Utilizador $utilizador)
     {
         $utilizador->delete();
-        $aux=REMAIN;
-        return redirect($aux)->withHeaders('Utilizador Delected');
+        return redirect(REMAIN)->withHeaders('Utilizador Delected');
     }
 }

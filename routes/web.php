@@ -2,9 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UtilizadorController;
 use App\Http\Controllers\SalaController;
+use App\Http\Controllers\EdificioController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,12 +25,16 @@ Route::get('/UtilizadorOut',[UtilizadorController::class, 'LogOut']);
 Route::get('/Utilizador/Create',[UtilizadorController::class, 'create']);
 Route::post('/Utilizador/store',[UtilizadorController::class, 'store']);
 Route::post("/Utilizador/Log_In",[UtilizadorController::class, 'Log_In']);
-
-Route::get('/Main',[SalaController::class, 'index']);
-
-
-
+Route::post("Sala/store",[SalaController::class, 'store']);
+Route::post("Edificio/store",[EdificioController::class, 'store']);
+Route::get('/Sala/Update/{$sala->id}',[SalaController::class, 'update']);
+Route::get('/Sala/Delete/{$sala->id}',[SalaController::class, 'destroy']);
+Route::get('/Edificio/Update/{$edificio->id}',[EdificioController::class, 'update']);
+Route::get('/Edificio/Delete/{$edificio->id}',[EdificioController::class, 'destroy']);
 Auth::routes();
-
+Route::get('/Main',[SalaController::class, 'index'])->middleware('ISLog');
+Route::get('/AdminMain',[SalaController::class, 'ADMINindex'])->middleware('ISADMIN');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
 
