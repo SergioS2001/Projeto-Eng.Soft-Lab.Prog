@@ -9,8 +9,9 @@ Registo
     <h1 class= "Title">
     Register Utilizador
     </h1>
-    <div class ="Regis_log_form_dux">
-    <div class="row">
+    <div class ="Regis_log_form_trex">
+
+
 
         <form class="col s12" action ="Utilizador/store" method="post" >
             {{ csrf_field() }}
@@ -92,11 +93,11 @@ Registo
 
 
 
-      </div>
+
+
+
 
     </div>
-
-
 </div>
 
 

@@ -19,6 +19,8 @@ class CreateEdificiosTable extends Migration
             $table->integer('Piso_min')->default(0);
             $table->integer('Piso_max')->default(0);
             $table->string('Morada');
+            $table->time('date_in');
+            $table->time('date_out');
             $table->timestamps();
         });
     }

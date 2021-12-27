@@ -8,20 +8,23 @@ body{
     }
     .Regis_log_form{
     background-color: #dcdcdc;
-    align-self: center;
     margin-left: 20ch;
     margin-bottom: 5ch;
-    margin-top: 5ch;
+    margin-top: 2ch;
     margin-right: 20ch;
     border:orange;
      border-width:5px;
+     list-style: none;
      border-style: double;
+
     }
     .Regis_log_form_dux{
-        align-self: center;
-        margin-left: 2ch;
-        margin-bottom: 100ch;
-        margin-right: 2ch;
+
+
+        margin-bottom: 12ch;
+
+        text-align: center;
+
         }
 
     .Title{
@@ -48,16 +51,26 @@ body{
 
 
     }
-    #left{
 
-        float:left;
-        text-align: center;
-        margin-left: 10ch;
-    }
-  #Right{
+.Right{
+margin-left: 10ch;
+margin-right: 10ch;
+border-top: thick solid black;
 
-         float:right;
-         text-align: center;
-         margin-right: 10ch;
+}
+.left{
+    margin-left: 10ch;
+    margin-right: 10ch;
     }
+  .tablespace{
+    margin-top: 20ch;
+
+        }
+.Regis_log_form_trex{
+    margin-bottom: 12ch;
+    margin-left: 10ch;
+    text-align: center;
+
+
+}
 

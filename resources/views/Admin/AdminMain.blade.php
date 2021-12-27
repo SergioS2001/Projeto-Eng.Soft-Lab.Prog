@@ -8,13 +8,12 @@ Salas
 <div class="Regis_log_form">
     <div class="Regis_log_form_dux">
 
-        <div id='left'>
-            <h4>  Salas</h4>
+        <div class="Left">
            <ul class="list-group">
                <table>
                    <caption>Tabela de Salas</caption>
                 <thead>
-<th id="id">ID</th>
+<th id="id">Id</th>
 <th id="Area">Area</th>
 <th id="Piso">Piso</th>
 <th id="id_edificio">id_edificio</th>
@@ -36,6 +35,12 @@ Salas
                 </tbody>
             </table>
            </ul>
+           @if(session()->get('Pagenated')==1)
+           {{ $salas->links() }}
+
+           @endif
+
+           <div class="tablespace">
            <form action="Sala/store" method="post">
             {{ csrf_field() }}
             <div class='Subtitle'>
@@ -80,17 +85,20 @@ Salas
 
 
         </form>
+
+           </div>
        </div>
-           <div id="Right">
-           <h4>Edificios</h4>
+           <div  class="Right">
            <table>
             <caption>Tabela de Edificios</caption>
          <thead>
-<th id="id">ID</th>
+<th id="id">Id</th>
 <th id="Nome">Nome</th>
 <th id="Piso_Min">Piso_Min</th>
 <th id="Piso_Max">Piso_Max</th>
 <th id="Morada">Morada</th>
+<th id="date_in">date_in</th>
+<th id="date_out">date_out</th>
 <th id="Update">Update</th>
 <th id="Delete">Delete</th>
 </thead>
@@ -99,7 +107,7 @@ Salas
                    @forelse($edificios as $edificio)
                    <li class="list-group-item">
 <tr>
-                       <h5 class="Subtitle"><td>{{$edificio->id}} </td><td> {{$edificio->Nome}} </td><td> {{$edificio->Piso_min}}</td><td> {{$edificio->Piso_max}}</td><td> {{$edificio->Morada}}</td><td>   <a href="/Edificio/Update/{{  $edificio->id }}">Update</a></td><td>  <a href="/Edificio/Delete/{{  $edificio->id}}" >Delete</a></td></h5>
+                       <h5 class="Subtitle"><td>{{$edificio->id}} </td><td> {{$edificio->Nome}} </td><td> {{$edificio->Piso_min}}</td><td> {{$edificio->Piso_max}}</td><td> {{$edificio->Morada}}</td><td>{{$edificio->date_in}} </td><td>{{$edificio->date_out}} </td><td>   <a href="/Edificio/Update/{{  $edificio->id }}">Update</a></td><td>  <a href="/Edificio/Delete/{{  $edificio->id}}" >Delete</a></td></h5>
 </tr>
                     </li>
                    @empty
@@ -108,8 +116,26 @@ Salas
                    @endforelse
                </ul>
 
+
 </tbody>
            </table>
+           @if(session()->get('Pagenated')==1)
+           {{ $edificios->links() }}
+           @if (session()->has('popup'))
+           <div class="alert alert-danger">
+               <ul>
+                   <h1>
+                       <?php  echo session()->get('popup');
+                          echo session()->forget('popup');?>
+                   </h1>
+               </ul>
+           </div>
+           @endif
+           @endif
+
+
+
+           <div class="tablespace">
                <form action="Edificio/store" method="post">
                 {{ csrf_field() }}
                 <div class='Subtitle'>
@@ -121,6 +147,10 @@ Salas
                 <label for="textarea2">Piso Minimo</label>
                 <input type="number" name='Max_Piso'><br>
                 <label for="textarea2">Piso Maximo</label>
+                <input type="time" name='date_in'><br>
+                <label for="textarea2">date_in</label>
+                <input type="time" name='date_out'><br>
+                <label for="textarea2">date_out</label>
                 <input type="text" name='Morada'><br>
                 <label for="textarea2">Morada</label>
                 <br>
@@ -134,16 +164,7 @@ Salas
                 </div>
 
                 @endif
-                @if (session()->has('popup'))
-                <div class="alert alert-danger">
-                    <ul>
-                        <h1>
-                            <?php  echo session()->get('popup');
-                               echo session()->forget('popup');?>
-                        </h1>
-                    </ul>
-                </div>
-                @endif
+
                 <div class="Subtitle">
                     <input type="submit" value="create" />
                 </div>
@@ -151,7 +172,10 @@ Salas
 
 
             </form>
+           </div>
+
        </div>
+
     </div>
 </div>
 @endsection

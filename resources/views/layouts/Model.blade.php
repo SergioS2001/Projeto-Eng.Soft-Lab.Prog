@@ -15,7 +15,7 @@
 
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-      <link rel="stylesheet" type="text/css" href="./mycss/css.css">
+      <link rel="stylesheet" type="text/css"  href="{{ URL::asset('mycss/css.css') }}">
 
 
 <title>
@@ -35,7 +35,7 @@
           <script  src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.js" integrity="sha512-m2PhLxj2N91eYrIGU2cmIu2d0SkaE4A14bCjVb9zykvp6WtsdriFCiXQ/8Hdj0kssUB/Nz0dMBcoLsJkSCto0Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <!-- Compiled and minified JavaScript -->
   <script  src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js" integrity="sha512-NiWqa2rceHnN3Z5j6mSAvbwwg3tiwVNxiAQaaSMSXnRRDh5C2mk/+sKQRw8qjV1vN4nf8iK2a0b048PnHbyx+Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="./mycss/java.js"></script>
+  <script type="text/javascript" src="{{ URL::asset('mycss/java.js') }}"></script>
 
 
         </body>

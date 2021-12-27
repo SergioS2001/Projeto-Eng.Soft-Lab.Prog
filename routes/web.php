@@ -27,14 +27,20 @@ Route::post('/Utilizador/store',[UtilizadorController::class, 'store']);
 Route::post("/Utilizador/Log_In",[UtilizadorController::class, 'Log_In']);
 Route::post("Sala/store",[SalaController::class, 'store']);
 Route::post("Edificio/store",[EdificioController::class, 'store']);
-Route::get('/Sala/Update/{$sala->id}',[SalaController::class, 'update']);
-Route::get('/Sala/Delete/{$sala->id}',[SalaController::class, 'destroy']);
-Route::get('/Edificio/Update/{$edificio->id}',[EdificioController::class, 'update']);
-Route::get('/Edificio/Delete/{$edificio->id}',[EdificioController::class, 'destroy']);
+
+Route::get("/Requisito/Make/{id}",[TestController::class,'MakeRequisito']);
 Auth::routes();
 Route::get('/Main',[SalaController::class, 'index'])->middleware('ISLog');
+Route::get('/Main/{numero}:{numeroedificios}',[SalaController::class, 'index_num'])->middleware('ISLog');
 Route::get('/AdminMain',[SalaController::class, 'ADMINindex'])->middleware('ISADMIN');
+Route::get('/AdminMain/{numero}:{numeroedificios}',[SalaController::class, 'ADMINindex_num'])->middleware('ISADMIN');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/Sala/Update/{id}',[TestController::class, 'updatesala'])->middleware('ISADMIN');
 
+Route::put('/Sala/updateput/{id}/',[SalaController::class, 'update'])->middleware('ISADMIN');
+Route::get('/Sala/Delete/{id}',[SalaController::class, 'destroy'])->middleware('ISADMIN');
+Route::get('/Edificio/Update/{id}',[TestController::class, 'updateedificio'])->middleware('ISADMIN');
+Route::get('/Edificio/Delete/{id}',[EdificioController::class, 'destroy'])->middleware('ISADMIN');
 
+Route::put('/Edificio/updateput/{id}/',[EdificioController::class, 'update'])->middleware('ISADMIN');
 

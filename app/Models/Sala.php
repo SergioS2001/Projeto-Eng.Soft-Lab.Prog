@@ -7,8 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Sala extends Model
 {
+
     use HasFactory;
+
+
     protected $fillable = [
+        'id',
         'id_edificio',
         'Piso',
         'Type',
@@ -22,4 +26,6 @@ class Sala extends Model
     {
     	return $this->belongsTo(Edificio::class);
     }
+
+
 }
