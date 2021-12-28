@@ -97,7 +97,7 @@ return $sala;
         'Piso' => 'required|integer',
         'Type' => 'required|string ',
         'Area' => 'required|numeric',
-        'Descricao' => 'string|required|max:200',
+        'Descricao' => 'string|required|max:200|min:20',
 
     ]);
     $request->only( 'id_edificio','Piso','Type','Descricao','Area');
@@ -107,7 +107,7 @@ return $sala;
         return redirect()->back()->withErrors('Edificio doesnt exist');
 
     }
-  if($ed->Piso_min >=$request->Piso ||$ed->Piso_max <= $request->Piso){
+  if($ed->Piso_min > $request->Piso ||$ed->Piso_max < $request->Piso){
 
 return redirect()->back()->withErrors('Piso doesnt exist');
 

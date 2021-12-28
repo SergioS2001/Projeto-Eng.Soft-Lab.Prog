@@ -36,10 +36,12 @@ Update Edificio {{ $edificios->id }}
 <th id="Piso">NEW Piso_Min</th>
 <th id="Type">NEW Piso_Max</th>
 <th id="NewDescricao">New Morada</th>
+<th id="date_in">Date In</th>
+<th id="date_out">Date Out</th>
 </thead>
      <tbody>
      <tr>
-        <h5 class="Subtitle"><td>  <input name='Nome' type="text"></td><td>  <input name='Min_Piso' type="number"> </td><td>  <input name='Max_Piso' type="number"> </td><td> <input name='Morada' type="text"></td></h5>
+        <h5 class="Subtitle"><td>  <input name='Nome' type="text"></td><td>  <input name='Min_Piso' type="number"> </td><td>  <input name='Max_Piso' type="number"> </td><td> <input name='Morada' type="text"></td><td> <input name='date_in' type="time"></td><td> <input name='date_out' type="time"></td></h5>
      </tr>
  </table>
  <input type="submit">
