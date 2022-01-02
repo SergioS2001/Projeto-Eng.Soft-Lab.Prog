@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NEWSALA;
 use App\Models\Edificio;
 use App\Models\Sala;
-
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
@@ -114,20 +115,24 @@ return redirect()->back()->withErrors('Piso doesnt exist');
   }
 
 $sala=$this->create($request);
+$this->SendMAIL($sala,1);
+
 $sala->save();
 return redirect()->back()->with('popup','Created sucessfully');
 
     }
 
     /**
-     * Display the specified resource.
+     * Display the Information of the requisições of the selected sala atravez do seu identificador unico(id).
      *
-     * @param  \App\Models\Sala  $sala
+     * @param    $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Sala $sala)
+    public function show($id)
     {
+        $ed=DB::table('requisitos')->where('id_Sala',$id)->get();
 
+      return view('sala.Requisito',["requisitos"=>$ed]);
     }
 
     /**
@@ -186,6 +191,7 @@ if($request->Area!=null){
         }
 
     if($this->check($ed,$ed->id_edificio)){
+        $this->SendMAIL($ed,2);
    return    redirect(REMAINADMIN)->with('popup','Sala Update');
 
     }
@@ -217,14 +223,28 @@ return False;
      */
     public function destroy($id)
     {
-$result =DB::select('select id from salas where id =? ', [$id]);
-if($result==null){
+$aux = DB::table('salas')->where('id_edificio',$id)->get();
+if($aux==null){
 
     return redirect()->back()->with('popup','Sala NOT FOUND');
 }
+$aux2=DB::table('requisitos')->where('id_Sala',$aux->id)->get();
+$this->SendMAIL($aux,3);
+foreach($aux2 as $requi){
+    DB::delete('delete from requisitos where id = ?', [$requi->id]);
+
+}
+
 DB::delete('delete from salas where id = ?', [$id]);
 
 
         return redirect()->back()->with('popup','Sala Delected'. $id);
     }
+    public function SendMAIL($sala,$mode)
+    {
+     $utils=DB::table('utilizadors')->get();
+       foreach($utils as $util){
+        Mail::to($util->Email)->send(new NEWSALA($sala,$mode));
+       }
+}
 }

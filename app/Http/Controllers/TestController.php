@@ -23,11 +23,6 @@ class TestController extends Controller
         return view('Main');
 
     }
-    public function MakeRequisito($id){
-
-        return view('MakeRequisito',["id"=>$id]);
-
-    }
     public function updatesala($id){
         $result =DB::table('salas')->where('id',$id)->first();
 
@@ -39,5 +34,10 @@ class TestController extends Controller
         $result =DB::table('edificios')->where('id',$id)->first();
         return view('edificio.update',["edificios"=>$result]);
 
+    }
+    public function update_display($id)
+    {
+        $result =DB::table('requisitos')->where('id',$id)->first();
+        return view('Requisito.update',["requisitos"=>$result]);
     }
 }

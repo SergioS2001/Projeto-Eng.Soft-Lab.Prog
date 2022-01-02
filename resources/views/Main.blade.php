@@ -24,7 +24,7 @@ Salas
                @forelse($salas as $sala)
                <li class="list-group-item">
                 <tr>
-                   <h5 class="Subtitle"><td>{{$sala->id}}</td><td>  {{$sala->Area}}</td><td>  {{$sala->Piso}} </td><td> {{$sala->id_edificio}}</td><td>   <a href="/Requisito/Make/{{ $sala->id }}}">Make Requisito</a></td></h5>
+                   <h5 class="Subtitle"><td><a href="/Requisitos/Show_SALA/{{ $sala->id }}">{{$sala->id}}</a></td><td>  {{$sala->Area}}</td><td>  {{$sala->Piso}} </td><td> {{$sala->id_edificio}}</td><td>   <a href="/Requisito/Make/{{ $sala->id }}}">Make Requisito</a></td></h5>
                 </tr>
                 </li>
                @empty

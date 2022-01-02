@@ -11,13 +11,13 @@
 
         @endif</li>
     <li class="divider"></li>
-    <li><a href="#!">two</a></li>
+    <li><a href="/Requisitos/Show">See My Requisitos</a></li>
 
     <li><a href="/UtilizadorOut">Log Out</a></li>
   </ul>
     <nav>
             <div class="nav-wrapper">
-              <a href="#" class="brand-logo">Logo</a>
+              <a href="/Requisitos/Show" class="brand-logo">Requisitos</a>
               <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><a href="sass.html">Sass</a></li>
                 <li><a href="badges.html">Components</a></li>

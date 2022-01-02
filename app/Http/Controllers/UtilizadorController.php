@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 
 define("REMAIN", "/Main");
 define("REMAINADMIN", "/AdminMain");
@@ -118,12 +119,12 @@ return redirect(REMAIN);
 
             return redirect(REMAINADMIN);
         }
-        return(REMAIN);
+        return Redirect(REMAIN);
 
 
 
 }
-    return redirect()->back()->withErrors('ERRROOO');
+return redirect()->back()->withErrors('Email doesnt exist or password doesnt match');
 
     }
     public function LogOut()

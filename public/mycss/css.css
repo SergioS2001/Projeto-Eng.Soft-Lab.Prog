@@ -74,6 +74,21 @@ margin-top: 5ch;
 
     margin-bottom: 12ch;
     margin-left: 10ch;
+    margin-right: 10ch;
     text-align: center;
 }
+.Together{
 
+    margin-bottom: 12ch;
+    margin-left: 10ch;
+    text-align: center;
+    flex: auto;
+}
+.titleinput{
+text-align: left;
+color: rgb(65, 118, 118);
+}
+.top{
+    margin-bottom: 20ch;
+
+    }
