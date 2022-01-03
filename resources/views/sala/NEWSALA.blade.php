@@ -26,7 +26,9 @@ SALAS CRIADADAS
     <li class="list-group-item">
      <tr>
 
-        SAlas     </tr>
+        SAlas
+
+    </tr>
      </li>
 
  </table>

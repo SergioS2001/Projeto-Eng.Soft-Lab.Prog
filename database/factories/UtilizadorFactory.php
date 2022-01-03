@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 use function PHPUnit\Framework\returnSelf;
 
-class UtilFactFactory extends Factory
+class UtilizadorFactory extends Factory
 {
     /**
      * Define the model's default state.
