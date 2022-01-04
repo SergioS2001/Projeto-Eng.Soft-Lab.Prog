@@ -168,7 +168,6 @@ return redirect()->back()->with('popup','Created sucessfully');
         $request->only( 'Id_edificio','Piso', 'Type','Area','Descricao');
         $ed=DB::table('salas')->where('id',$sala)->first();
 
-
 if($ed==null ){
 return redirect(REMAINADMIN)->withErrors('Sala not existe or erro nos pisos');
 }else{
@@ -203,14 +202,13 @@ if($request->Area!=null){
 
     public function check($ed,$sala){
         $Edificio =DB::table('edificios')->where('id',$sala)->first();
-if($Edificio!=null ){
     if($Edificio->Piso_min>=$ed->Piso ||$Edificio->Piso_max<=$ed->Piso){
         DB::update('update salas  set Area = ? , Piso= ? ,id_edificio= ?  where id = ? ',[$ed->Area, $ed->Piso,$ed->id_edificio,$ed->id]);
         return True;
         }
 
 
-}
+
 
 return False;
     }
@@ -223,12 +221,17 @@ return False;
      */
     public function destroy($id)
     {
-$aux = DB::table('salas')->where('id_edificio',$id)->get();
+$aux = DB::table('salas')->where('id',$id)->get();
 if($aux==null){
 
     return redirect()->back()->with('popup','Sala NOT FOUND');
 }
-$aux2=DB::table('requisitos')->where('id_Sala',$aux->id)->get();
+$g=null;
+foreach($aux as $sala){
+$g=$sala;
+
+}
+$aux2=DB::table('requisitos')->where('id_Sala',$g->id)->get();
 $this->SendMAIL($aux,3);
 foreach($aux2 as $requi){
     DB::delete('delete from requisitos where id = ?', [$requi->id]);

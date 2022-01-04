@@ -102,14 +102,11 @@ class RequisitoController extends Controller
         $ed1=DB::table('edificios')->where('id',$ed->id_edificio)->first();
         if($ed1==null){
 return redirect(REMAIN)->withErrors('Erro: Sala or Edificio is not found, refresh');
-
         }
         $aux2=new Carbon($request->date_in);
         $aux2= $aux2->format(HOUR_FORMAT);
        $aux=new Carbon($request->date_out);
        $aux= $aux->format(HOUR_FORMAT);
-
-
 if(($request->group1>0 && $request->group1<4)&&($aux2>$ed1->date_in &&$aux < $ed1->date_out)){
     $re0=Carbon::parse($request->date_in)->format(DATA_FORMAT);
      $re=Carbon::parse($request->date_in)->addHours($request->group1)->format(DATA_FORMAT);
@@ -118,16 +115,14 @@ if(($request->group1>0 && $request->group1<4)&&($aux2>$ed1->date_in &&$aux < $ed
     $ed=DB::table('requisitos')->where('date_out', '>', $re0)->where('date_in', '<', $re2)->where('id_Sala',$idsala)->get();
     $util=session()->get('utilizadors');
     if(count($ed)==0){
-
         $requisito=$this->create($request,$idsala);
         Mail::to($util->Email)->send(new NEWREQUISITO($util,$requisito,1));
 $requisito->save();
-
 return redirect(REMAIN)->with('popup','Requisito feito');
     }else{ if($util->Type=='Aluno'){
-        return redirect()->back()->withErrors('Erro datas incio e fim esta em violaçao com outro requisito');}
+        return redirect()->back()->withErrors('Erro datas incio e fim esta em violaçao com outro requisito');
+    }
         else{
-
             foreach($ed as $req){
 $this->destroy($req->id);
 
@@ -135,7 +130,7 @@ $this->destroy($req->id);
             $requisito=$this->create($request,$idsala);
             Mail::to($util->Email)->send(new NEWREQUISITO($util,$requisito,1));
             $requisito->save();
-return redirect("/Main")->with('popup','Overwrite done');
+return redirect(REMAIN)->with('popup','Overwrite done');
         }
 
     }
@@ -223,7 +218,7 @@ return redirect(REMAIN)->withErrors('Erro: Sala or Edificiois not found, refresh
                     $requisito=$this->create($request,$requist->id_Sala);
                     Mail::to($util->Email)->send(new NEWREQUISITO($util,$requisito,1));
                     $requisito->save();
-        return redirect("/Main")->with('popup','Overwrite done');
+        return redirect(REMAIN)->with('popup','Overwrite done');
                 }
 
 
@@ -249,7 +244,7 @@ return redirect(REMAIN)->withErrors('Erro: Sala or Edificiois not found, refresh
 
         if($result==null||$util==null){
 
-            return redirect('/Main')->with('popup','Requisito NOT FOUND');
+            return redirect(REMAIN)->with('popup','Requisito NOT FOUND');
         }
 
 
