@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 
 define("REMAIN", "/Main");
 define("REMAINADMIN", "Admin.AdminMain");
+define("REMAINADMIN2", "/AdminMain");
 /**
  *  *  class controler sala
  *     usamos este controller para gerir as funções necessarias para a criação, mostrar, editar ,delete de salas.
@@ -196,7 +197,7 @@ return redirect()->back()->with('popup','Created sucessfully');
         $ed=DB::table('salas')->where('id',$sala)->first();
 
 if($ed==null ){
-return redirect(REMAINADMIN)->withErrors('Sala not existe or erro nos pisos');
+return redirect(REMAINADMIN2)->withErrors('Sala not existe or erro nos pisos');
 }else{
 if($request->Id_edificio!=null){
 $ed->id_edificio=$request->Id_edificio;
@@ -218,7 +219,7 @@ if($request->Area!=null){
 
     if($this->check($ed,$ed->id_edificio)){
         $this->SendMAIL($ed,2);
-   return    redirect(REMAINADMIN)->with('popup','Sala Update');
+   return    redirect(REMAINADMIN2)->with('popup','Sala Update');
 
     }
 
@@ -233,9 +234,6 @@ if($request->Area!=null){
         DB::update('update salas  set Area = ? , Piso= ? ,id_edificio= ?  where id = ? ',[$ed->Area, $ed->Piso,$ed->id_edificio,$ed->id]);
         return True;
         }
-
-
-
 
 return False;
     }
@@ -259,7 +257,7 @@ $g=$sala;
 
 }
 $aux2=DB::table('requisitos')->where('id_Sala',$g->id)->get();
-$this->SendMAIL($aux,3);
+$this->SendMAIL($g,3);
 foreach($aux2 as $requi){
     DB::delete('delete from requisitos where id = ?', [$requi->id]);
 
