@@ -9,16 +9,25 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
-use phpDocumentor\Reflection\PseudoTypes\True_;
+
 
 define("REMAIN", "/Main");
 define("REMAINADMIN", "Admin.AdminMain");
+/**
+ *  *  class controler sala
+ *     usamos este controller para gerir as funções necessarias para a criação, mostrar, editar ,delete de salas.
+ *
+ * @return \Illuminate\Http\Response
+ */
+
+
+
 class SalaController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Display a listing on a table without pagination, all of salas with the option of make a requisito.
+     * funcao correspodente para a view Main
+     * @return view(REMAIN, ['salas' => $salas],['edificios' => $edificios]);
      */
     public function index()
     {
@@ -26,10 +35,15 @@ class SalaController extends Controller
         session(['Pagenated' => 0]);
         $salas = Sala::all();
         $edificios = Edificio::all();
-        return view(REMAIN, ['salas' => $salas],['edificios' => $edificios]);
-
-
+        return view(REMAIN, ['salas' => $salas], ['edificios' => $edificios]);
     }
+      /**
+     * Display a listing on a table with pagination, a limited numere of salas with the option of make a requisito.
+     * @param numero numero de salas para display
+     * @param numeroedificios numero de edificios para dispay se nao for valido chama-se a funcao index
+     * funcao correspodente para a view Main
+     * @return view(REMAIN, ['salas' => $salas],['edificios' => $edificios]);
+     */
     public function index_num($numero,$numeroedificios)
     {
 
@@ -45,6 +59,13 @@ class SalaController extends Controller
        }
 
     }
+      /**
+     * Display a listing on a table with pagination, a limited numere of salas with the option of make a requisito.
+     * @param numero numero de salas para display
+     * @param numeroedificios numero de edificios para dispay se nao for valido chama-se a funcao ADMINindex
+     * funcao correspodente para a view AdminMain
+     * @return  view(REMAINADMIN, ['salas' => $salas],['edificios' => $edificios]);
+     */
     public function ADMINindex_num($numero,$numeroedificios)
     {
         if($numero<0||$numero==null||$numeroedificios<0||$numeroedificios==null){
@@ -57,6 +78,11 @@ class SalaController extends Controller
             }
 
     }
+    /**
+     * Display a listing on a table without pagination, all of salas with the option of make a requisito.
+     * funcao correspodente para a view AdminMain
+     * @return view(REMAINADMIN, ['salas' => $salas],['edificios' => $edificios]);
+     */
     public function ADMINindex()
     {
         session(['Pagenated' => 0]);
@@ -67,9 +93,9 @@ class SalaController extends Controller
 
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * private function to create a Sala from Request
+     * @param Request parametro do tipo request para utilizar
+     * @return sala Class sala com a informação para utilizar
      */
     public function create(Request $request)
     {
@@ -85,10 +111,11 @@ return $sala;
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created resource in storage com validações normais para a estabilidade e logica da base de dados.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request  $request do view da crição da sala apartir do form method PUT
+     * @return  redirect()->back()->with('popup','Created sucessfully'); return successfull
+     *
      */
     public function store(Request $request)
     {
@@ -126,7 +153,7 @@ return redirect()->back()->with('popup','Created sucessfully');
      * Display the Information of the requisições of the selected sala atravez do seu identificador unico(id).
      *
      * @param    $id
-     * @return \Illuminate\Http\Response
+     * @return view('sala.Requisito',["requisitos"=>$ed]);
      */
     public function show($id)
     {
@@ -147,11 +174,11 @@ return redirect()->back()->with('popup','Created sucessfully');
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified resource in storage. apartir da informação da form
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Sala  $sala
-     * @return \Illuminate\Http\Response
+     * @return redirect(REMAINADMIN)->with('popup','Sala Update');
      */
     public function update(Request $request, $sala)
     {
@@ -214,10 +241,10 @@ return False;
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified resource from storage apartir do indetificador unico
      *
-     * @param  \App\Models\Sala  $sala
-     * @return \Illuminate\Http\Response
+     * @param  $id identificador unico
+     * @return redirect()->back()->with('popup','Sala Delected'. $id); successfull delete
      */
     public function destroy($id)
     {
@@ -243,6 +270,14 @@ DB::delete('delete from salas where id = ?', [$id]);
 
         return redirect()->back()->with('popup','Sala Delected'. $id);
     }
+  /**
+     * Remove the specified resource from storage apartir do indetificador unico
+     *
+     * @param  $sala informação da sala para display no email
+     * @param  $mode mode que sera o tipo de mail que ira ser enviado
+     * @return redirect()->back()->with('popup','Sala Delected'. $id); successfull delete
+     */
+
     public function SendMAIL($sala,$mode)
     {
      $utils=DB::table('utilizadors')->get();

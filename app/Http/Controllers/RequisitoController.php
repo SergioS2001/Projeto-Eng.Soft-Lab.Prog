@@ -17,10 +17,10 @@ define("HOUR_FORMAT","H:i:s");
 define("REMAIN", "/Main");
 class RequisitoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+   /**
+     * Display a listing on a table without pagination, all of the requisitos of the utilizador
+     * funcao correspodente para a view Requisito.index
+     * @return view(SHOW, ['requisitos' => $requisito]);
      */
     public function index()
     {
@@ -38,6 +38,11 @@ class RequisitoController extends Controller
 
 
     }
+      /**
+     * Display a listing on a table with pagination, a limited numere of requisitos with the option of update or delete.
+     * @param numero numero de requisito para display
+     * @return view(SHOW, ['requisitos' => $requisito]);
+     */
     public function indexnumb($numero)
     {
    if($numero<0||$numero==null){
@@ -57,6 +62,12 @@ class RequisitoController extends Controller
              return view(SHOW, ['requisitos' => $requisito]);
             }
     }
+
+     /**
+     * Display information of sala and a form to create a requisito
+     * @param id numero de sala para display informacao basica do mesmo e o horario disponivel do edificio
+     * @return view(SHOW, ['requisitos' => $requisito]);
+     */
     public function MakeRequisito($id){
         $result =DB::table('salas')->where('id',$id)->first();
 
@@ -69,9 +80,9 @@ class RequisitoController extends Controller
 
     }
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+      * private function to create a Requisto apartir de Um Request
+     *@param request request que ira ser utilizado para transferir a classe requisito
+     * @return $requisito
      */
     public function create($request,$some)
     {
@@ -107,7 +118,7 @@ return redirect(REMAIN)->withErrors('Erro: Sala or Edificio is not found, refres
         $aux2= $aux2->format(HOUR_FORMAT);
        $aux=new Carbon($request->date_out);
        $aux= $aux->format(HOUR_FORMAT);
-if(($request->group1>0 && $request->group1<4)&&($aux2>$ed1->date_in &&$aux < $ed1->date_out)){
+if(($request->group1>0 && $request->group1<4)&&($aux2>$ed1->date_in &&$aux < $ed1->date_out &&$request->date_in>now()) ){
     $re0=Carbon::parse($request->date_in)->format(DATA_FORMAT);
      $re=Carbon::parse($request->date_in)->addHours($request->group1)->format(DATA_FORMAT);
      $re2=Carbon::parse($request->date_out)->format(DATA_FORMAT);
@@ -208,7 +219,8 @@ return redirect(REMAIN)->withErrors('Erro: Sala or Edificiois not found, refresh
     return redirect(REMAIN)->with('popup','Requisito Updated');
         }else{
             if($util->Type=='Aluno'){
-                return redirect()->back()->withErrors('Erro datas incio e fim esta em violaçao com outro requisito');}
+                return redirect()->back()->withErrors('Erro datas incio e fim esta em violaçao com outro requisito');
+            }
                 else{
 
                     foreach($ed as $req){
@@ -250,7 +262,6 @@ return redirect(REMAIN)->withErrors('Erro: Sala or Edificiois not found, refresh
 
         DB::delete('delete from requisitos where id = ?', [$id]);
         Mail::to($util->Email)->send(new NEWREQUISITO($result->id_Utilizador,$result,3));
-
                 return redirect()->back()->with('popup','Requisito Delected'. $id);
     }
 }

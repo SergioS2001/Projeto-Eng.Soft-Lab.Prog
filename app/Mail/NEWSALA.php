@@ -19,14 +19,14 @@ class NEWSALA extends Mailable
     public function __construct($sala,$mode)
     {
         switch($mode){case 1:
-            return $this->view('sala.NEWSALA',['salas' => $sala ]);
+            return $this->view('sala.NEWSALA',['sala' => $sala ]);
             break;
         case 2:
-        return $this->view('sala.UPDATESALA',['salas' => $sala ]);
+        return $this->view('sala.UPDATESALA',['sala' => $sala ]);
 
         break;
         case 3:
-            return $this->view('sala.DELETESALA',['salas' => $sala ]);
+            return $this->view('sala.DELETESALA',['sala' => $sala ]);
             break;
 
         default:

@@ -26,7 +26,8 @@ SALAS CRIADADAS
     <li class="list-group-item">
      <tr>
 
-        SAlas
+        <h5 class="Subtitle"><td>{{$sala->id}} </td><td> {{$sala->Area}} </td><td> {{$sala->Piso}}</td><td> {{$sala->id_edificio}}</td></h5>
+
 
     </tr>
      </li>

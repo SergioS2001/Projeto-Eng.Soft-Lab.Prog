@@ -59,8 +59,8 @@ border-top: thick solid black;
 margin-top: 5ch;
 }
 .left{
-    padding-left: 10ch;
-    padding-right: 10ch;
+    margin-left: 10ch;
+    margin-right: 10ch;
     margin-top: 5ch;
     text-align: center;
     }

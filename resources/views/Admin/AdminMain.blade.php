@@ -9,7 +9,7 @@ Salas
     <div class="Regis_log_form_dux">
 
         <div class="Left">
-           <ul class="list-group">
+
                <table>
                    <caption>Tabela de Salas</caption>
                 <thead>
@@ -34,7 +34,7 @@ Salas
                @endforelse
                 </tbody>
             </table>
-           </ul>
+
            @if(session()->get('Pagenated')==1)
            {{ $salas->links() }}
 
