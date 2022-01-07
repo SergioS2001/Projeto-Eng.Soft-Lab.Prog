@@ -14,18 +14,20 @@
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
       <link rel="stylesheet" type="text/css"  href="{{ URL::asset('mycss/css.css') }}">
+       <!--Icon displayed on the Tiler card UFP -->
+      <link rel="icon" href="{!! asset('https://th.bing.com/th/id/OIP.BAIMISetTgoVBWQ3zjl_JQAAAA?pid=ImgDet&rs=1') !!}"/>
 
-
+<!-- Title displayed in the title card of the page -->
 <title>
                        @yield('Title','Default Title')
      </title>
 </head>
     <body>
-
+    <!--Header of the page with page with links of the requisitos , dropbox to see names , the requisitos, and log out with the link of the materilize -->
         @include('Include.Header')
-
+    <!--Content of the form with tables, lists and forms that informs the user of the relevant information  -->
         @yield('Content')
-
+    <!--Footer with links with link to main and adminmain  -->
 
         @include('Include.Footer')
 

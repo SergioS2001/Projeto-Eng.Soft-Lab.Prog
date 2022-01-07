@@ -10,9 +10,6 @@ Registo
     Register Utilizador
     </h1>
     <div class ="Regis_log_form_trex">
-
-
-
         <form class="col s12" action ="Utilizador/store" method="post" >
             {{ csrf_field() }}
             <div class="row">
@@ -81,25 +78,11 @@ Registo
   @endif
                 <div class="Subtitle">
                 <input  type="submit"  value="Register" />
-
                 <div>
-
-
         </form>
         <div class="Subtitle">
             <a href="{{url('/logI' )}}" class="Subtitle" >Log In</a>
             </div>
-
-
-
-
-
-
-
-
     </div>
 </div>
-
-
-
 @endsection

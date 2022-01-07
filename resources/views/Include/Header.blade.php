@@ -19,8 +19,8 @@
             <div class="nav-wrapper">
               <a href="/Requisitos/Show" class="brand-logo">Requisitos</a>
               <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="sass.html">Sass</a></li>
-                <li><a href="badges.html">Components</a></li>
+                <li><a href="https://www.w3schools.com/sass/sass_intro.asp">Sass</a></li>
+                <li><a href="https://materializecss.com/">Materialize</a></li>
 
                 @if(session()->has('utilizadors'))
 

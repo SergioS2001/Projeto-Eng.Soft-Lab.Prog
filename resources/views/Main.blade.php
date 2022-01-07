@@ -5,11 +5,13 @@ Salas
 @endsection
 
 @section('Content')
+<!--  Begin the form    -->
 <div class="Regis_log_form">
-    <div class="Regis_log_form_dux">
-
+    <!--  Creates what looks like margins in the form    -->
+    <div class="Regis_log_form_trex">
+         <!--  division with the table with salas     -->
         <div class="Left">
-           <ul class="list-group">
+
                <table>
                    <caption>Tabela de Salas</caption>
                 <thead>
@@ -22,23 +24,28 @@ Salas
                 <tbody>
 
                @forelse($salas as $sala)
+               <ul class="list-group">
                <li class="list-group-item">
                 <tr>
                    <h5 class="Subtitle"><td><a href="/Requisitos/Show_SALA/{{ $sala->id }}">{{$sala->id}}</a></td><td>  {{$sala->Area}}</td><td>  {{$sala->Piso}} </td><td> {{$sala->id_edificio}}</td><td>   <a href="/Requisito/Make/{{ $sala->id }}}">Make Requisito</a></td></h5>
                 </tr>
                 </li>
+            </ul>
                @empty
 
                <h5 class="Subtitle">No Salas Found!</h5>
                @endforelse
+
                 </tbody>
             </table>
-           </ul>
+
            @if(session()->get('Pagenated')==1)
            {{ $salas->links() }}
            @endif
        </div>
+         <!--  space between the divs     -->
        <div class="tablespace">
+             <!--  division with the table with edificios     -->
            <div  class="Right">
            <table>
             <caption>Tabela de Edificios</caption>
@@ -81,12 +88,6 @@ Salas
                </ul>
            </div>
            @endif
-
-
-
-
-
-
        </div>
        </div>
     </div>

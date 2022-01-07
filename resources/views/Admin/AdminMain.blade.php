@@ -6,7 +6,7 @@ Salas
 
 @section('Content')
 <div class="Regis_log_form">
-    <div class="Regis_log_form_dux">
+    <div class="Regis_log_form_trex">
 
         <div class="Left">
 
@@ -23,11 +23,13 @@ Salas
                 <tbody>
 
                @forelse($salas as $sala)
+               <ul>
                <li class="list-group-item">
                 <tr>
                    <h5 class="Subtitle"><td>{{$sala->id}}</td><td>  {{$sala->Area}}</td><td>  {{$sala->Piso}} </td><td> {{$sala->id_edificio}}</td><td>   <a href="/Sala/Update/{{$sala->id}}">Update</a></td><td>   <a href="/Sala/Delete/{{$sala->id}}" >Delete</a></td></h5>
                 </tr>
                 </li>
+            </ul>
                @empty
 
                <h5 class="Subtitle">No Salas Found!</h5>
