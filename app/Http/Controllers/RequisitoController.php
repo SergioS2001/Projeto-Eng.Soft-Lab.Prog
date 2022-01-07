@@ -11,6 +11,8 @@ use App\Mail\MailtrapExample;
 use Illuminate\Support\Facades\Mail;
 use DateTime;
 
+use function PHPUnit\Framework\isEmpty;
+
 define("SHOW", "Requisito.Index");
 define("DATA_FORMAT","Y-m-d H:i:s");
 define("HOUR_FORMAT","H:i:s");
@@ -96,10 +98,12 @@ class RequisitoController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Valida o request ,com a sala para ver se é possivel com o horario do edificio e se não exister sobrepossição
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param   $idsala identificador unico da sala que estamos a tentar requisitar
+     * @return redirect(REMAIN)->with('popup','Requisito feito'); normal succefull
+     *
      */
     public function store(Request $request, $idsala)
     {
@@ -176,12 +180,13 @@ return redirect()->back()->withErrors('Erro datas incio e fim não são espaciad
         //
     }
 
-    /**
-     * Update the specified resource in storage.
+   /**
+     * Valida o request ,com o id do reuisito para atualizar, e se existe sobrepossição
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Requisito  $requisito
-     * @return \Illuminate\Http\Response
+     * @param   $idsala identificador unico da sala que estamos a tentar requisitar
+     * @return redirect(REMAIN)->with('popup','Requisito feito'); normal succefull
+     *
      */
     public function update(Request $request, $idrequisto)
     {
@@ -202,14 +207,14 @@ return redirect(REMAIN)->withErrors('Erro: Sala or Edificiois not found, refresh
         $aux2= $aux2->format(HOUR_FORMAT);
        $aux=new Carbon($request->date_out);
        $aux= $aux->format(HOUR_FORMAT);
-       if(($request->group1>0 && $request->group1<4)&&($aux2>$ed1->date_in &&$aux < $ed1->date_out)){
+       if(($request->group1>0 && $request->group1<4)&&($aux2>$ed1->date_in &&$aux < $ed1->date_out &&$request->date_in>now())){
         $re0=Carbon::parse($request->date_in)->format(DATA_FORMAT);
          $re=Carbon::parse($request->date_in)->addHours($request->group1)->format(DATA_FORMAT);
          $re2=Carbon::parse($request->date_out)->format(DATA_FORMAT);
       if($re==$re2){
-        $ed=DB::table('requisitos')->where('date_out', '>', $re0)->where('date_in', '<', $re2)->where('id_Sala',$requist->id_Sala)->get();
+        $ed=DB::table('requisitos')->where('date_out', '>', $re0)->where('date_in', '<', $re2)->where('id_Sala',$requist->id_Sala)->where('id_Utilizador','!=',$util->id)->get();
 
-        if($ed==null){
+        if(count($ed)===0){
 
             $requisito=$this->create($request,$requist->id_Sala);
 
@@ -219,7 +224,7 @@ return redirect(REMAIN)->withErrors('Erro: Sala or Edificiois not found, refresh
     return redirect(REMAIN)->with('popup','Requisito Updated');
         }else{
             if($util->Type=='Aluno'){
-                return redirect()->back()->withErrors('Erro datas incio e fim esta em violaçao com outro requisito');
+                return redirect()->back()->withErrors('Erro datas incio e fim esta em violaçao com outro requisito' );
             }
                 else{
 
@@ -246,8 +251,8 @@ return redirect(REMAIN)->withErrors('Erro: Sala or Edificiois not found, refresh
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Requisito  $requisito
-     * @return \Illuminate\Http\Response
+     * @param  $id requisito para remover
+     * @return redirect()->back()->with('popup','Requisito Delected'. $id);
      */
     public function destroy($id)
     {

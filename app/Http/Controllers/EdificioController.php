@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 define("REMAINADMIN", "/AdminMain");
+use Carbon\Carbon;
+define("DATA_FORMAT","Y-m-d H:i:s");
+define("HOUR_FORMAT","H:i:s");
 class EdificioController extends Controller
 {
     /**
@@ -20,10 +23,10 @@ class EdificioController extends Controller
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+       /**
+     * private function to create a edificio from Request
+     * @param Request parametro do tipo request para utilizar
+     * @return edificio Class edificio com a informação para utilizar
      */
     public function create(Request $request)
     {
@@ -38,7 +41,7 @@ class EdificioController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created resource in storage with validation
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -92,7 +95,7 @@ return redirect()->back();
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Edificio  $edificio
+     * @param  $edificio id para update
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request,$edificio)
@@ -138,6 +141,13 @@ return FAlse;
     }
 return True;
 }
+/**
+     * check created to see if a vallidated atribute is null or not, if null then dont change if it isnt then alter the values
+     *
+     * @param  \Illuminate\Http\Request  $request values to check
+     * @param  $ed old edificio to alter if $request isnt null
+     * NO return because of altering arguments not returning results
+     */
 public function check2(Request $request,$ed){
     if($request->Nome!=null){
         $ed->Nome=$request->Nome;
@@ -160,19 +170,34 @@ public function check2(Request $request,$ed){
             }
 
 }
+/**
+     * checked if there is a requisito that is active that is outside of the altered values of time in the updated edificio
+     *
+     * @param  $ed edificio updated
+     * @param  $ed id of the edificio
+     * @return TRUE if there isnt a requisito
+     * @return False if there is a requisito that is outside of horario
+     */
 public function check3($ed,$edificio){
-    $SALA =DB::select('select e.id from requisitos e, edificios f ,salas s where f.id=? and f.id=s.id_edificio and s.id_edificio=e.id_edificio and e.data_out > NOW() and e.data_in< ? and e.data_out>? ', [$edificio,$ed->data_in,$ed->data_out]);
-echo $SALA['id'];
- if($SALA['id']!=null){
-    return false;
-    }
+
+    $SALA =DB::select('select * from requisitos e, edificios f ,salas s where f.id= ? and f.id=s.id_edificio and s.id=e.id_Sala and e.date_out > NOW()', [$edificio]);
+foreach($SALA as $sala){
+    $aux2=new Carbon($sala->date_in);
+    $aux2= $aux2->format(HOUR_FORMAT);
+   $aux=new Carbon($sala->date_in);
+   $aux= $aux->format(HOUR_FORMAT);
+if($aux2<$ed->date_in ||$aux>$ed->date_in ){
+return false;
+}
+
+}
 return True;
 }
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Edificio  $edificio
-     * @return \Illuminate\Http\Response
+     * @param  $id identificador unico
+     * @return redirect()->back()->with('popup','Edificio Delected'. $id);
      */
     public function destroy($id)
     {
@@ -199,6 +224,13 @@ DB::delete('delete from edificios where id = ?', [$id]);
 
         return redirect()->back()->with('popup','Edificio Delected'. $id);
     }
+   /**
+     * Handler of the mail that recebes a edificio and a mode to give the information in email and what time of email it is
+     * @param  $edificio informação do edificio para display no email
+     * @param  $mode mode que sera o tipo de mail que ira ser enviado
+     */
+
+
     public function SendMAIL($edifio,$mode)
     {
      $utils=DB::table('utilizadors')->get();

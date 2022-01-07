@@ -230,7 +230,7 @@ if($request->Area!=null){
 
     public function check($ed,$sala){
         $Edificio =DB::table('edificios')->where('id',$sala)->first();
-    if($Edificio->Piso_min>=$ed->Piso ||$Edificio->Piso_max<=$ed->Piso){
+    if($Edificio->Piso_min<=$ed->Piso && $Edificio->Piso_max>=$ed->Piso){
         DB::update('update salas  set Area = ? , Piso= ? ,id_edificio= ?  where id = ? ',[$ed->Area, $ed->Piso,$ed->id_edificio,$ed->id]);
         return True;
         }
@@ -269,11 +269,11 @@ DB::delete('delete from salas where id = ?', [$id]);
         return redirect()->back()->with('popup','Sala Delected'. $id);
     }
   /**
-     * Remove the specified resource from storage apartir do indetificador unico
+     * Handler of the mail that recebes a Sala and a mode to give the information in email and what time of email it is
      *
      * @param  $sala informação da sala para display no email
      * @param  $mode mode que sera o tipo de mail que ira ser enviado
-     * @return redirect()->back()->with('popup','Sala Delected'. $id); successfull delete
+     *
      */
 
     public function SendMAIL($sala,$mode)

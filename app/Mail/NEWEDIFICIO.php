@@ -12,8 +12,8 @@ class NEWEDIFICIO extends Mailable
     use Queueable, SerializesModels;
 
     /**
-     * Create a new message instance.
-     *
+     * @param $edificio informação a por na tabela
+     *@param $mode mode que ira determinar o tipo de email enviado
      * @return void
      */
     public function __construct($edificio,$mode)

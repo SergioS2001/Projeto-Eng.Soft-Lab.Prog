@@ -25,7 +25,7 @@ class SalaFactory extends Factory
      $res=random_int($Piso_Min,$Piso_max);
         return [
             'Area'=>$this->faker->numberBetween(1,200),
-            'Piso'=>$Piso_max,
+            'Piso'=>$res,
             'id_edificio'=>  $id ,
             'type'=>$this->faker->text(40),
             'Descricao'=>$this->faker->text(120),
