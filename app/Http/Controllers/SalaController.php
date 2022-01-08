@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
-
+use Barryvdh\DomPDF\Facade as PDF;
+use Barryvdh\DomPDF\PDF as DomPDFPDF;
 
 define("REMAIN", "/Main");
 define("REMAINADMIN", "Admin.AdminMain");
@@ -283,4 +284,12 @@ DB::delete('delete from salas where id = ?', [$id]);
         Mail::to($util->Email)->send(new NEWSALA($sala,$mode));
        }
 }
+public function SendPDF()
+{
+$salas=Sala::all();
+$pdf=PDF::loadView('PDF.Salaspdf', ['Salas' => $salas])->setOptions(['defaultFont' => 'sans-serif']);
+return $pdf->stream('salas.pdf');
+
+}
+
 }

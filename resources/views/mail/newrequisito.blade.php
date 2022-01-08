@@ -22,4 +22,4 @@ REQUISITOS CRIADADOS
                             </tr>
                             </tbody>
                         </table>
-                        @endsection
+ @endsection

@@ -37,8 +37,9 @@ Salas
                @endforelse
 
                 </tbody>
-            </table>
 
+            </table>
+            <a href="/Sala/pdf">Download PDF</a>
            @if(session()->get('Pagenated')==1)
            {{ $salas->links() }}
            @endif
@@ -74,7 +75,9 @@ Salas
 
 
 </tbody>
+
            </table>
+           <a href="/Edificio/pdf">Download PDF</a>
            @if(session()->get('Pagenated')==1)
            {{ $edificios->links() }}
            @endif

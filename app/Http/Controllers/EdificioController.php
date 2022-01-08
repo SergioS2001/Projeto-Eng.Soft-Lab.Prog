@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 define("REMAINADMIN", "/AdminMain");
 use Carbon\Carbon;
+use Barryvdh\DomPDF\Facade as PDF;
 define("DATA_FORMAT","Y-m-d H:i:s");
 define("HOUR_FORMAT","H:i:s");
 class EdificioController extends Controller
@@ -238,5 +239,11 @@ DB::delete('delete from edificios where id = ?', [$id]);
         Mail::to($util->Email)->send(new NEWEDIFICIO($edifio,$mode));
        }
 }
+public function SendPDF()
+{
+$Edificios=Edificio::all();
+$pdf=PDF::loadView('PDF.Edificiospdf', ['edificios' => $Edificios])->setOptions(['defaultFont' => 'sans-serif']);
+return $pdf->stream('Edificios.pdf');
 
+}
 }

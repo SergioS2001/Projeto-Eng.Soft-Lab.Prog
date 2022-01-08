@@ -40,7 +40,8 @@ Route::get("/Requisitos/Show_SALA/{id}",[SalaController::class,'show'])->middlew
 Route::get("/Requisito/Update/{id}",[TestController::class,'update_display'])->middleware('ISLog');
 Route::get("/Requisito/updateput/{id}/",[RequisitoController::class,'update'])->middleware('ISLog');
 Route::get("/requisito/Delete/{id}",[RequisitoController::class,'destroy'])->middleware('ISLog');
-
+//Route::get('/Sala/pdf',[SalaController::class, 'Sendpdf']);
+//Route::get("/Edificio/pdf",[EdificioController::class, 'Sendpdf']);
 
 Route::get('/Main/{numero}:{numeroedificios}',[SalaController::class, 'index_num'])->middleware('ISLog');
 Route::get('/AdminMain',[SalaController::class, 'ADMINindex'])->middleware('ISADMIN');
