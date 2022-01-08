@@ -15,10 +15,10 @@ Salas
                <table>
                    <caption>Tabela de Salas</caption>
                 <thead>
-<th id="id">Id</th>
-<th id="Area">Area</th>
-<th id="Piso">Piso</th>
-<th id="id_edificio">id_edificio</th>
+<th id="id">@sortablelink('id')</th>
+<th id="Area">@sortablelink('Area')</th>
+<th id="Piso">@sortablelink('Piso')</th>
+<th id="id_edificio">@sortablelink('id_edificio')</th>
 <th id="Requisitar"> Requisitar</th>
 </thead>
                 <tbody>
@@ -39,6 +39,7 @@ Salas
                 </tbody>
 
             </table>
+            <a href=""
             <a href="/Sala/pdf">Download PDF</a>
            @if(session()->get('Pagenated')==1)
            {{ $salas->links() }}
@@ -51,13 +52,13 @@ Salas
            <table>
             <caption>Tabela de Edificios</caption>
          <thead>
-<th id="id">Id</th>
-<th id="Nome">Nome</th>
-<th id="Piso_Min">Piso_Min</th>
-<th id="Piso_Max">Piso_Max</th>
-<th id="Morada">Morada</th>
-<th id="date_in">date_in</th>
-<th id="date_out">date_out</th>
+<th id="id">@sortablelink('id')</th>
+<th id="Nome">@sortablelink('Nome')</th>
+<th id="Piso_Min">@sortablelink('Piso_min')</th>
+<th id="Piso_Max">@sortablelink('Piso_max')</th>
+<th id="Morada">@sortablelink('Morada')</th>
+<th id="date_in">@sortablelink('date_in')</th>
+<th id="date_out">@sortablelink('date_out')</th>
 </thead>
 <tbody>
                <ul class="list-group">
@@ -77,6 +78,7 @@ Salas
 </tbody>
 
            </table>
+
            <a href="/Edificio/pdf">Download PDF</a>
            @if(session()->get('Pagenated')==1)
            {{ $edificios->links() }}

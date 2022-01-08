@@ -4,11 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Kyslik\ColumnSortable\Sortable;
 class Sala extends Model
 {
 
-    use HasFactory;
+    use HasFactory,Sortable;
 
 
     protected $fillable = [
@@ -16,8 +16,14 @@ class Sala extends Model
         'id_edificio',
         'Piso',
         'Type',
-        'Descricao',
+        'Descricao'
     ];
+    public $sortable = [   'id',
+    'id_edificio',
+    'Area',
+    'Piso',
+    'Type',
+    'Descricao'];
     public function Requisitos()
     {
     	return $this->hasMany(Requisito::class);

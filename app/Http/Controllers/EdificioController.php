@@ -181,7 +181,7 @@ public function check2(Request $request,$ed){
      */
 public function check3($ed,$edificio){
 
-    $SALA =DB::select('select * from requisitos e, edificios f ,salas s where f.id= ? and f.id=s.id_edificio and s.id=e.id_Sala and e.date_out > NOW()', [$edificio]);
+    $SALA =DB::select('select * from requisitos e, edificios f ,salas s where f.id= ? and f.id=s.id_edificio and s.id=e.id_Sala and e.date_in > NOW()', [$edificio]);
 foreach($SALA as $sala){
     $aux2=new Carbon($sala->date_in);
     $aux2= $aux2->format(HOUR_FORMAT);

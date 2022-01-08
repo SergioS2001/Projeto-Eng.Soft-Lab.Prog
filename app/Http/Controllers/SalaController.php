@@ -35,8 +35,8 @@ class SalaController extends Controller
     {
 
         session(['Pagenated' => 0]);
-        $salas = Sala::all();
-        $edificios = Edificio::all();
+        $salas = Sala::sortable()->paginate(5);
+        $edificios = Edificio::sortable()->paginate(5);
         return view(REMAIN, ['salas' => $salas], ['edificios' => $edificios]);
     }
       /**
@@ -53,8 +53,8 @@ class SalaController extends Controller
        $this->index();
        }else{
         session(['Pagenated' => 1]);
-        $salas = Sala::paginate($numero);
-        $edificios = Edificio::paginate($numeroedificios);
+        $salas = Sala::sortable()->paginate($numero);
+        $edificios = Edificio::sortable()->paginate($numeroedificios);
         return view(REMAIN, ['salas' => $salas],['edificios' => $edificios]);
 
 
@@ -74,8 +74,8 @@ class SalaController extends Controller
             $this->ADMINindex();
             }else{
                 session(['Pagenated' => 1]);
-             $salas = Sala::paginate($numero, ['*'], 'paramName');
-             $edificios = Edificio::paginate($numeroedificios, ['*'], 'param2Name');
+             $salas = Sala::sortable()->paginate($numero, ['*'], 'paramName');
+             $edificios = Edificio::sortable()->paginate($numeroedificios, ['*'], 'param2Name');
              return view(REMAINADMIN, ['salas' => $salas],['edificios' => $edificios]);
             }
 
@@ -88,8 +88,8 @@ class SalaController extends Controller
     public function ADMINindex()
     {
         session(['Pagenated' => 0]);
-        $salas = Sala::all();
-        $edificios = Edificio::all();
+        $salas = Sala::sortable()->paginate(5);
+        $edificios = Edificio::sortable()->paginate(5);
         return view(REMAINADMIN, ['salas' => $salas],['edificios' => $edificios]);
     }
 
