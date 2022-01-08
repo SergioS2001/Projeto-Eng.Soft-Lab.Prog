@@ -12,6 +12,12 @@ use Carbon\Carbon;
 use Barryvdh\DomPDF\Facade as PDF;
 define("DATA_FORMAT","Y-m-d H:i:s");
 define("HOUR_FORMAT","H:i:s");
+/**
+ *  *  class controler Edificio
+ *     usamos este controller para gerir as funções necessarias para a criação, mostrar, editar ,delete de edificios.
+ *
+ * @author <40115@ufp.edu.pt> Ruben Pinto <39836@ufp.edu.pt> Sérgio Sousa  ;
+ */
 class EdificioController extends Controller
 {
     /**

@@ -19,7 +19,7 @@ define("REMAINADMIN2", "/AdminMain");
  *  *  class controler sala
  *     usamos este controller para gerir as funções necessarias para a criação, mostrar, editar ,delete de salas.
  *
- * @return \Illuminate\Http\Response
+ * @author <40115@ufp.edu.pt> Ruben Pinto <39836@ufp.edu.pt> Sérgio Sousa  ;
  */
 
 

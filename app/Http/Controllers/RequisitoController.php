@@ -17,6 +17,10 @@ define("SHOW", "Requisito.Index");
 define("DATA_FORMAT","Y-m-d H:i:s");
 define("HOUR_FORMAT","H:i:s");
 define("REMAIN", "/Main");
+ /**
+     * Requisito controller that stores the methods that with interact with the database
+     * @author <40115@ufp.edu.pt> Ruben Pinto <39836@ufp.edu.pt> Sérgio Sousa  ;
+     */
 class RequisitoController extends Controller
 {
    /**

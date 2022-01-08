@@ -13,7 +13,12 @@ use Illuminate\Support\Facades\Redirect;
 
 define("REMAIN", "/Main");
 define("REMAINADMIN", "/AdminMain");
-
+/**
+ *  *  class controler Utilizador
+ *     usamos este controller para gerir as funções necessarias para a criação, mostrar, editar ,delete de  Utilizador.
+ *
+ * @author <40115@ufp.edu.pt> Ruben Pinto <39836@ufp.edu.pt> Sérgio Sousa  ;
+ */
 class UtilizadorController extends Controller
 {
 
