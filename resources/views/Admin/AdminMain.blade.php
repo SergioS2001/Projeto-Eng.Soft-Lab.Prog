@@ -121,7 +121,7 @@ Salas
 
 </tbody>
            </table>
-
+<a href="/AdminMain/8:8">8</a><p></p><a href="/AdminMain/16:16">16</a><p></p><a href="/AdminMain/24:24">24</a>
            @if(session()->get('Pagenated')==1)
            {{ $edificios->links() }}
            @if (session()->has('popup'))

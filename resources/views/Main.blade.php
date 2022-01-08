@@ -78,7 +78,7 @@ Salas
 </tbody>
 
            </table>
-
+           <a href="/Main/8:8">8</a><p></p><a href="/Main/16:16">16</a><p></p><a href="/Main/24:24">24</a>
            <a href="/Edificio/pdf">Download PDF</a>
            @if(session()->get('Pagenated')==1)
            {{ $edificios->links() }}
