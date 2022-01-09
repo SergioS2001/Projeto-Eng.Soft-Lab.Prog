@@ -286,9 +286,9 @@ DB::delete('delete from salas where id = ?', [$id]);
 }
 public function SendPDF()
 {
-$salas=Sala::all();
-$pdf=PDF::loadView('PDF.Salaspdf', ['Salas' => $salas])->setOptions(['defaultFont' => 'sans-serif']);
-return $pdf->stream('salas.pdf');
+$Salas=DB::table('salas')->get();
+$pdf=PDF::loadView('PDF.Salaspdf',compact(  'Salas'))->setOptions(['defaultFont' => 'sans-serif']);
+return $pdf->download('salas.pdf');
 
 }
 
