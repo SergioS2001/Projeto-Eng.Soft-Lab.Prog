@@ -5,16 +5,27 @@ body{
     background-attachment: fixed;
     background-size: cover;
 
-
     }
     .Regis_log_form{
-    background-color: white;
-    border-color: black;
-    align-self: center;
-
-
+    background-color: #dcdcdc;
+    margin-left: 20ch;
+    margin-bottom: 5ch;
+    margin-top: 2ch;
+    margin-right: 20ch;
+    border:orange;
+     border-width:5px;
+     list-style: none;
+     border-style: double;
 
     }
+    .Regis_log_form_dux{
+
+
+        margin-bottom: 12ch;
+        text-align: center;
+
+
+        }
 
     .Title{
         font-size: x-large;
@@ -40,6 +51,45 @@ body{
 
 
     }
-      main {
-        flex: 1 0 auto;
-      }
+
+.Right{
+margin-left: 10ch;
+margin-right: 10ch;
+border-top: thick solid black;
+margin-top: 5ch;
+}
+.left{
+    margin-left: 10ch;
+    margin-right: 10ch;
+    margin-top: 5ch;
+    text-align: center;
+
+    }
+
+
+  .tablespace{
+    margin-top: 20ch;
+
+        }
+.Regis_log_form_trex{
+
+    margin-bottom: 12ch;
+    margin-left: 10ch;
+    margin-right: 10ch;
+    text-align: center;
+}
+.Together{
+
+    margin-bottom: 12ch;
+    margin-left: 10ch;
+    text-align: center;
+    flex: auto;
+}
+.titleinput{
+text-align: left;
+color: rgb(65, 118, 118);
+}
+.top{
+    margin-bottom: 20ch;
+
+    }

@@ -7,7 +7,7 @@ Utilizador/Create
 @section('Content')
 <div class ="Regis_log_form">
 
-
+sddd
 
 </div>
 @endsection
