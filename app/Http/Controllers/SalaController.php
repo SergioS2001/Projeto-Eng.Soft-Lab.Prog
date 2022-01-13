@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Mail\NEWSALA;
 use App\Models\Edificio;
 use App\Models\Sala;
+use Barryvdh\DomPDF\PDF as DomPDFPDF;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Barryvdh\DomPDF\Facade as PDF;
-use Barryvdh\DomPDF\PDF as DomPDFPDF;
+define("DATA_FORMAT","Y-m-d H:i:s");
+define("HOUR_FORMAT","H:i:s");
 
 define("REMAIN", "/Main");
 define("REMAINADMIN", "Admin.AdminMain");
@@ -286,9 +288,9 @@ DB::delete('delete from salas where id = ?', [$id]);
 }
 public function SendPDF()
 {
-$Salas=DB::table('salas')->get();
-$pdf=PDF::loadView('PDF.Salaspdf',compact(  'Salas'))->setOptions(['defaultFont' => 'sans-serif']);
-return $pdf->download('salas.pdf');
+//$Salas=Sala::all('*');
+//$pdf = PDF::loadView('PDF.Salaspdf', compact('Salas'));
+//return $pdf->stream('salas.pdf') ;
 
 }
 

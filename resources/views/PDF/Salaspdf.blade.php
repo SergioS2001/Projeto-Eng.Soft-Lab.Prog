@@ -1,12 +1,16 @@
-@extends('layouts.MAIL_MODEL')
+<!DOCTYPE html>
+<html lang="en">
+    <head>
 
-@section('Title')
-PDF
-@endsection
-@section('Title2')
-PDF
-@endsection
-@section('Content')
+
+        <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+
+
+<title>
+DEfault
+     </title>
+</head>
+    <body>
 <!--  Begin the form    -->
 <div class="Regis_log_form">
     <!--  Creates what looks like margins in the form    -->
@@ -24,18 +28,23 @@ PDF
 
 </thead>
 <tbody>
-    @forelse($Salas as $sala)
-     <tr>
-        <h5 class="Subtitle"><td>{{$sala->id}}</a></td><td>  {{$sala->Area}}</td><td>  {{$sala->Piso}} </td><td> {{$sala->id_edificio}}</td></h5>
-     </tr>
+<?php
+    foreach ($Salas as$sala) {
 
-    @empty
+    echo' <tr>';
+       echo' <h5 class="Subtitle"><td>'.$sala->id.'</a></td><td> '. $sala->Area .'</td><td>' .$sala->Piso . '</td><td>'. $sala->id_edificio . '</td></h5>
+     </tr>';
 
-    <h5 class="Subtitle">No Salas Found!</h5>
-    @endforelse
+    }
+
+
+    ?>
 
 
      </tbody>
             </table>
-            @endsection
+        </div>
+    </div>
+</div>
 
+        </body>

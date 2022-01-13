@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Edificio;
-define("DATA_FORMAT", "H:i:s");
+
 class EdificioFactory extends Factory
 {
     /**
@@ -21,11 +21,11 @@ class EdificioFactory extends Factory
             'Piso_min'=>$this->faker->numberBetween(-20,0),
             'Piso_max'=>$this->faker->numberBetween(0,20),
             'date_in'=>function(){
-$h=$this->faker->time(DATA_FORMAT);
+$h=$this->faker->time(HOUR_FORMAT);
 while($h<'20:00:00'&& $h>'5:00:00'){
-    $h=$this->faker->time(DATA_FORMAT);
+    $h=$this->faker->time(HOUR_FORMAT);
 }
-return$h=$this->faker->time(DATA_FORMAT);
+return$h=$this->faker->time(HOUR_FORMAT);
             },
             'date_out'=>'20:00:00',
             'Morada' => $this->faker->address(),

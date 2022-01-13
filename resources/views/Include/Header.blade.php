@@ -4,7 +4,7 @@
 
         <?php
             $util=session()->get('utilizadors');
-            echo '<a>'. $util->Nome.'</a>';
+            echo '<a href="/Utilizador/Show">'. $util->Nome.'</a>';
             ?>
 
 

@@ -18,11 +18,13 @@ class SalaFactory extends Factory
 
     public function definition()
     {
-
+        $d=DB::table('edificios')->get();
+if($d==null){
+    \App\Models\Edificio::factory(5)->create();
+}
        $id=Edificio::all()->random()->id;
-       $Piso_Min = DB::statement('select Piso_min from edificios where id=?',[$id]);
-       $Piso_max = DB::statement('select Piso_max from edificios where id=?',[$id]);
-     $res=random_int($Piso_Min,$Piso_max);
+       $Piso_Min = DB::table('edificios')->where('id',$id)->first();
+     $res=random_int($Piso_Min->Piso_min,$Piso_Min->Piso_max);
         return [
             'Area'=>$this->faker->numberBetween(1,200),
             'Piso'=>$res,

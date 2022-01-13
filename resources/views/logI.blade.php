@@ -66,10 +66,12 @@ Log In
         </form>
         <div class="Subtitle">
             <a href="{{url('/Registo' )}}" class="Subtitle" >Registar</a>
+
             </div>
 
 
       </div>
+      <a href="{{ url('/Utilizador/forgotone') }}" > FORGOT PASSWORD</a>
     </div>
       </div>
 @endsection

@@ -2,17 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ChangePassword;
+use App\Mail\ResetPassword;
 use App\Models\Utilizador;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
-
+use Illuminate\Support\Facades\Auth;
 define("REMAIN", "/Main");
 define("REMAINADMIN", "/AdminMain");
+define("LOGIN", "/logI");
+define("DATA_FORMAT","Y-m-d H:i:s");
+define("HOUR_FORMAT","H:i:s");
+define("PASSWORD_FORMAT","required|string|min:8|max:20");
 /**
  *  *  class controler Utilizador
  *     usamos este controller para gerir as funções necessarias para a criação, mostrar, editar ,delete de  Utilizador.
@@ -23,7 +29,7 @@ class UtilizadorController extends Controller
 {
 
      /**
-     * Display a listing of the resource.
+     * Display a listing of the resource.(NOT IMPLEMENTED)
      *
      * @return \Illuminate\Http\Response
      */
@@ -35,7 +41,7 @@ class UtilizadorController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new resource.(NOT IMPLEMENTED)
      *
      * @return \Illuminate\Http\Response
      */
@@ -46,9 +52,9 @@ class UtilizadorController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Receve um Request pelo metodo post para registar um utilizador com os requisitos minimos
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request  $request from the Register view that will have the basic user information to validate and create a Utilizador
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -58,7 +64,7 @@ class UtilizadorController extends Controller
             'Nome' => 'required|min:8|max:50|string ',
             'Type' => 'required',
             'Email' => 'required |email|unique:utilizadors',
-            'Password' => 'required|string|min:8|max:20',
+            'Password' => PASSWORD_FORMAT,
             'Re-password'=>'required|same:Password',
         ], ['Nome.required'=> 'The Name field is required.',
         'Nome.min'=> 'The Name field is too short(<8).',
@@ -76,10 +82,7 @@ if(!($request->Type== 'Aluno'||$request->Type=='Docente'||$request->Type=='Admin
 
      redirect()->back()->withErrors($v);
 }
-
-
          $Utilizador = new Utilizador;
-
          $Utilizador->Nome= $request->Nome;
          $Utilizador->Type= $request->Type;
          $Utilizador->Email= $request->Email;
@@ -104,15 +107,24 @@ return redirect(REMAIN);
      * @param  \App\Models\Utilizador  $utilizador
      * @return \Illuminate\Http\Response
      */
-    public function show(Utilizador $utilizador)
+    public function show()
     {
-        return view('Utilizador.show', ['utilizador' => $utilizador]);
+$utilizador=session()->get('utilizadors');
+        return view('Utilizador.show', ['util' => $utilizador]);
     }
+
+
+    /**
+     * LOG IN function to verify that the email and passsword match and create a sesson for the user
+     *
+     * @param  \Illuminate\Http\Request $request with email and password
+     * @return \Illuminate\Http\Response
+     */
     public function Log_In(Request $request){
 
         $request->validate([
         'Email' => 'required |email',
-        'Password' => 'required|string|min:8|max:20',
+        'Password' => PASSWORD_FORMAT,
 
     ]);
 
@@ -132,6 +144,13 @@ return redirect(REMAIN);
 return redirect()->back()->withErrors('Email doesnt exist or password doesnt match');
 
     }
+
+    /**
+     * LOG OUT function to forget the seasson and log out the user
+     *
+     *
+     * @return \Illuminate\Http\Response goes back
+     */
     public function LogOut()
     {
         $value = session('utilizadors','default');
@@ -153,7 +172,7 @@ return redirect()->back()->withErrors('Email doesnt exist or password doesnt mat
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified resource in storage. (NOT IMPLEMENTED)
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Utilizador  $utilizador
@@ -173,7 +192,118 @@ return redirect()->back()->withErrors('Email doesnt exist or password doesnt mat
 
         return redirect(REMAIN)->withHeaders('Successfull');
     }
+/** Function that recieves the current password and the new password with the confirmation and checks if it is current and in the right formatt
+ *
+ * @param  \Illuminate\Http\Request  $request
+ * @return \Illuminate\Http\Response
+ */
 
+
+    public function change_Password(Request $request)
+    {
+        $request->validate([
+            'Old_Password' => PASSWORD_FORMAT,
+            'New_Password' => PASSWORD_FORMAT,
+            'Re-password' => 'required|same:New_Password',
+        ]);
+        $request->only( 'Old_Password','New_Password','Re-password');
+        $util=session()->get('utilizadors');
+        if(Hash::check($request->Old_Password, $util->Password)){
+            $Password=bcrypt($request->New_Password);
+            $util->Password=$Password;
+            DB::update('update utilizadors  set Password = ?  where id = ? ',[$Password,$util->id]);
+            session(['utilizadors' => $util]);
+            Mail::to($util->Email)->send(new ChangePassword($util));
+         return    redirect('/Main')->with('popup','PasswordChanged');
+        }
+       return redirect('/Utilizador/Show')->withErrors('Erro password not match');
+    }
+
+
+/** Function that display the email request view
+ *
+ *
+ * @return view
+ */
+
+
+    public function VIEW_EMAIL(){
+return view('Utilizador.Email_view');
+    }
+
+/** Function that recieves the email, validates it , checks if it exists and creates a token and sends an email with the email and token to reset the password
+ *
+ * @param  \Illuminate\Http\Request  $request
+ * @return \Illuminate\Http\Response
+ */
+    public function forget_Password(Request $request){
+        $request->validate([
+            'Email' => 'email|required|',
+        ]);
+
+$util=DB::table('utilizadors')->where('Email',$request->Email)->get()->first();
+
+if($util==null){
+return redirect()->back()->withErrors('ERRO Email doesnt exist');
+}
+
+$token=0;
+for($i=0;$i<10;$i++){
+$token=$token*random_int(2,9)+random_int(2,9);
+}
+
+
+DB::insert('insert into password_resets(email,token,created_at) values(?,?,?)',[$request->Email,$token,now()]);
+Mail::to($request->Email)->send(new ResetPassword($request->Email,$token));
+return redirect(LOGIN)->with('popup','Check Email');
+    }
+
+/** Function that recieves the email, token and checks if it exists, if it doesnt it goes to logi page to warn the user its no valid, if it does it return the view to intruduce the password
+ *
+ * @param  Email the email
+ * @param  token that was generated before
+ * @return \Illuminate\Http\Response
+ */
+    public function forget_Password_commit($Email,$token){
+
+   $result=DB::table('password_resets')->where('email',$Email)->where('token',$token);
+if($result==null){
+
+return redirect(LOGIN)->withErrors('ERRO LINK NOT VALID');
+
+}
+return view('Utilizador.ConformPassword',['Email'=>$Email,'token'=>$token]);
+
+    }
+/** Function that recieves the password and the confirmation to it and updates it and removes the token that in the database to invalidate the links
+ *
+ * @param  \Illuminate\Http\Request  $request password and confirm password
+ * @param  Email the email
+ * @param  token that was generated before
+ * @return \Illuminate\Http\Response
+ */
+    public function Password_confirm(Request $request,$Email,$token){
+
+        $request->validate([
+            'New_Password' => PASSWORD_FORMAT,
+            'Re-password' => 'required|same:New_Password',
+        ]);
+        $request->only(  'New_Password', 'Re-password');
+        $result=DB::table('password_resets')->where('email',$Email)->where('token',$token)->get()->first();
+        if($result==null){
+
+        return redirect(LOGIN)->withErrors('ERRO LINK NOT VALID');
+
+        }
+        DB::delete('delete from password_resets where email = ? ', [$Email]);
+        $Password=bcrypt($request->New_Password);
+        DB::update('update utilizadors  set Password = ?  where Email= ? ',[$Password,$Email]);
+        $util=DB::table('Utilizadors')->where('email',$Email)->get()->first();
+
+        Mail::to($Email)->send(new ChangePassword($util));
+return redirect(LOGIN)->with('popup','Insert New Password');
+
+    }
     /**
      * Remove the specified resource from storage.
      *

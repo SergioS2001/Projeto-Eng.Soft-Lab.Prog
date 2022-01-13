@@ -39,7 +39,6 @@ Salas
                 </tbody>
 
             </table>
-            <a href=""
             <a href="/Sala/pdf">Download PDF</a>
            @if(session()->get('Pagenated')==1)
            {{ $salas->links() }}

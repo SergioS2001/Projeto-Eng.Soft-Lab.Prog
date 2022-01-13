@@ -1,10 +1,8 @@
 body{
-
     background-image: url(https://th.bing.com/th/id/R.74d5753b1547e38c897bd3ca2b04304d?rik=7tcVi7GX3bWeEg&pid=ImgRaw&r=0);
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
-
     }
     .Regis_log_form{
     background-color: #dcdcdc;
@@ -16,17 +14,17 @@ body{
      border-width:5px;
      list-style: none;
      border-style: double;
-
     }
     .Regis_log_form_dux{
-
-
         margin-bottom: 12ch;
         text-align: center;
-
-
         }
-
+        .Regis_log_form_trex{
+            margin-bottom: 12ch;
+            margin-left: 10ch;
+            margin-right: 10ch;
+            text-align: center;
+        }
     .Title{
         font-size: x-large;
         text-align: center;
@@ -45,11 +43,7 @@ body{
 
     }
     .submitt{
-
         text-align: center;
-
-
-
     }
 
 .Right{
@@ -71,13 +65,7 @@ margin-top: 5ch;
     margin-top: 20ch;
 
         }
-.Regis_log_form_trex{
 
-    margin-bottom: 12ch;
-    margin-left: 10ch;
-    margin-right: 10ch;
-    text-align: center;
-}
 .Together{
 
     margin-bottom: 12ch;
@@ -93,3 +81,19 @@ color: rgb(65, 118, 118);
     margin-bottom: 20ch;
 
     }
+    .border-lines{
+        border-top: thick solid black;
+        border-bottom: thick solid black;
+        border-left: thick solid black;
+        border-right: thick solid black;
+        margin-bottom: 20ch;
+        margin-left: 20ch;
+        margin-right: 20ch;
+    }
+    .inborder-lines{
+
+        margin-bottom: 2ch;
+        margin-left: 2ch;
+        margin-right: 2ch;
+    }
+
