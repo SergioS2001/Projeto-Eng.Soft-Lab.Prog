@@ -41,7 +41,7 @@ Make Requisito
 <div class='input-field col s6'>
     <em class='material-icons prefix'>F</em>
     <input class='top' name='date_out' type='datetime-local' >
-</div>";
+</div>
 
 
         <div class="row">
@@ -69,9 +69,7 @@ Make Requisito
         </div>
     </fieldset>
       </div>
-      <div class="row">
-        <input type="submit"  value="Create requisito"/>
-      </div>
+      <button class="btn waves-effect waves-light" type="submit" name="action">Create Requisito</button>
     </div>
 </form>
 @if ($errors->any())

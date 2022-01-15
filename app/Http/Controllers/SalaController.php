@@ -36,7 +36,7 @@ class SalaController extends Controller
     public function index()
     {
 
-        session(['Pagenated' => 0]);
+        session(['Pagenated' => 1]);
         $salas = Sala::sortable()->paginate(5);
         $edificios = Edificio::sortable()->paginate(5);
         return view(REMAIN, ['salas' => $salas], ['edificios' => $edificios]);
@@ -50,7 +50,6 @@ class SalaController extends Controller
      */
     public function index_num($numero,$numeroedificios)
     {
-
        if($numero<0||$numero==null||$numeroedificios<0||$numeroedificios==null){
        $this->index();
        }else{
@@ -58,8 +57,6 @@ class SalaController extends Controller
         $salas = Sala::sortable()->paginate($numero);
         $edificios = Edificio::sortable()->paginate($numeroedificios);
         return view(REMAIN, ['salas' => $salas],['edificios' => $edificios]);
-
-
        }
 
     }
@@ -89,7 +86,7 @@ class SalaController extends Controller
      */
     public function ADMINindex()
     {
-        session(['Pagenated' => 0]);
+        session(['Pagenated' => 1]);
         $salas = Sala::sortable()->paginate(5);
         $edificios = Edificio::sortable()->paginate(5);
         return view(REMAINADMIN, ['salas' => $salas],['edificios' => $edificios]);
@@ -149,7 +146,7 @@ $sala=$this->create($request);
 $this->SendMAIL($sala,1);
 
 $sala->save();
-return redirect()->back()->with('popup','Created sucessfully');
+return redirect()->back(303)->with('popup','Created sucessfully');
 
     }
 
@@ -222,7 +219,7 @@ if($request->Area!=null){
 
     if($this->check($ed,$ed->id_edificio)){
         $this->SendMAIL($ed,2);
-   return    redirect(REMAINADMIN2)->with('popup','Sala Update');
+   return    redirect(REMAINADMIN2,303)->with('popup','Sala Update');
 
     }
 
@@ -269,7 +266,7 @@ foreach($aux2 as $requi){
 DB::delete('delete from salas where id = ?', [$id]);
 
 
-        return redirect()->back()->with('popup','Sala Delected'. $id);
+        return redirect()->back(303)->with('popup','Sala Delected'. $id);
     }
   /**
      * Handler of the mail that recebes a Sala and a mode to give the information in email and what time of email it is
@@ -286,12 +283,6 @@ DB::delete('delete from salas where id = ?', [$id]);
         Mail::to($util->Email)->send(new NEWSALA($sala,$mode));
        }
 }
-public function SendPDF()
-{
-//$Salas=Sala::all('*');
-//$pdf = PDF::loadView('PDF.Salaspdf', compact('Salas'));
-//return $pdf->stream('salas.pdf') ;
 
-}
 
 }

@@ -66,7 +66,7 @@ Update Requisito {{ $requisitos->id }}
      </tbody>
  </table>
 
- <input type="submit">
+ <button class="btn waves-effect waves-light" type="submit" name="action">Update Requisito</button>
      </form>
      @if ($errors->any())
      <div class="alert alert-danger">

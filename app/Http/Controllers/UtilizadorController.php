@@ -13,12 +13,12 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
-define("REMAIN", "/Main");
-define("REMAINADMIN", "/AdminMain");
+define("REMAIN13", "/Main");
+define("REMAINADMIN13", "/AdminMain");
 define("LOGIN", "/logI");
-define("DATA_FORMAT","Y-m-d H:i:s");
-define("HOUR_FORMAT","H:i:s");
-define("PASSWORD_FORMAT","required|string|min:8|max:20");
+define("DATA_FORMAT13","Y-m-d H:i:s");
+define("HOUR_FORMAT13","H:i:s");
+define("PASSWORD_FORMAT13","required|string|min:8|max:20");
 /**
  *  *  class controler Utilizador
  *     usamos este controller para gerir as funções necessarias para a criação, mostrar, editar ,delete de  Utilizador.
@@ -59,12 +59,14 @@ class UtilizadorController extends Controller
      */
     public function store(Request $request)
     {
+
+
         $v = Validator::make([], []);
             $request->validate([
             'Nome' => 'required|min:8|max:50|string ',
             'Type' => 'required',
             'Email' => 'required |email|unique:utilizadors',
-            'Password' => PASSWORD_FORMAT,
+            'Password' => PASSWORD_FORMAT13,
             'Re-password'=>'required|same:Password',
         ], ['Nome.required'=> 'The Name field is required.',
         'Nome.min'=> 'The Name field is too short(<8).',
@@ -91,12 +93,12 @@ if(!($request->Type== 'Aluno'||$request->Type=='Docente'||$request->Type=='Admin
          $Utilizador->save();
 
          session(['utilizadors' => $Utilizador]);
-         echo $Utilizador->Type;
+
 if( $Utilizador->Type =='Admin'){
 
-    return redirect(REMAINADMIN);
+    return redirect(REMAINADMIN13,303);
 }
-return redirect(REMAIN);
+return redirect(REMAIN13,303);
 
 
     }
@@ -124,7 +126,7 @@ $utilizador=session()->get('utilizadors');
 
         $request->validate([
         'Email' => 'required |email',
-        'Password' => PASSWORD_FORMAT,
+        'Password' => PASSWORD_FORMAT13,
 
     ]);
 
@@ -134,9 +136,9 @@ $utilizador=session()->get('utilizadors');
         session(['utilizadors' => $Utilizador]);
         if( $Utilizador->Type=='Admin'){
 
-            return redirect(REMAINADMIN);
+            return redirect(REMAINADMIN13,303);
         }
-        return Redirect(REMAIN);
+        return Redirect(REMAIN13,303);
 
 
 
@@ -190,7 +192,7 @@ return redirect()->back()->withErrors('Email doesnt exist or password doesnt mat
         $utilizador->update($request->all());
 
 
-        return redirect(REMAIN)->withHeaders('Successfull');
+        return redirect(REMAIN13)->withHeaders('Successfull');
     }
 /** Function that recieves the current password and the new password with the confirmation and checks if it is current and in the right formatt
  *
@@ -202,8 +204,8 @@ return redirect()->back()->withErrors('Email doesnt exist or password doesnt mat
     public function change_Password(Request $request)
     {
         $request->validate([
-            'Old_Password' => PASSWORD_FORMAT,
-            'New_Password' => PASSWORD_FORMAT,
+            'Old_Password' => PASSWORD_FORMAT13,
+            'New_Password' => PASSWORD_FORMAT13,
             'Re-password' => 'required|same:New_Password',
         ]);
         $request->only( 'Old_Password','New_Password','Re-password');
@@ -285,7 +287,7 @@ return view('Utilizador.ConformPassword',['Email'=>$Email,'token'=>$token]);
     public function Password_confirm(Request $request,$Email,$token){
 
         $request->validate([
-            'New_Password' => PASSWORD_FORMAT,
+            'New_Password' => PASSWORD_FORMAT13,
             'Re-password' => 'required|same:New_Password',
         ]);
         $request->only(  'New_Password', 'Re-password');
@@ -313,6 +315,6 @@ return redirect(LOGIN)->with('popup','Insert New Password');
     public function destroy(Utilizador $utilizador)
     {
         $utilizador->delete();
-        return redirect(REMAIN)->withHeaders('Utilizador Delected');
+        return redirect(REMAIN13)->withHeaders('Utilizador Delected');
     }
 }

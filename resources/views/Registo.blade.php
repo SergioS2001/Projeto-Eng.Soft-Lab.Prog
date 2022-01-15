@@ -13,14 +13,14 @@ Registo
         <form class="col s12" action ="Utilizador/store" method="post" >
             {{ csrf_field() }}
             <div class="row">
-                <div class="input-field col s12">
+                <div class="input-field col s6">
                     <em class="material-icons prefix">email</em>
                   <input  type="text" name="Nome" class="validate">
                   <label for="Nome">Nome</label>
                     </div>
-              </div>
-          <div class="row">
-            <div class="input-field col s12">
+
+
+            <div class="input-field col s6">
                 <em class="material-icons prefix">email</em>
               <input id="Email" type="text" name="Email" class="validate">
               <label for="email">Email</label>
@@ -76,9 +76,7 @@ Registo
           </ul>
       </div>
   @endif
-                <div class="Subtitle">
-                <input  type="submit"  value="Register" />
-                <div>
+  <button class="btn waves-effect waves-light" type="submit" name="action">Submit</button>
         </form>
         <div class="Subtitle">
             <a href="{{url('/logI' )}}" class="Subtitle" >Log In</a>

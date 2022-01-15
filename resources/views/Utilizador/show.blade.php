@@ -85,10 +85,13 @@ Utilizador Information
       @endif
                     <div class="Subtitle">
                     <input  type="submit"  value="Changed" />
+                    </div>
+                </div>
             </form>
         </div>
        </div>
     </div>
 </div>
+
 
 @endsection

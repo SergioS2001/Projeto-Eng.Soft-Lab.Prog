@@ -7,7 +7,16 @@ Salas
 @section('Content')
 <div class="Regis_log_form">
     <div class="Regis_log_form_trex">
-
+        @if (session()->has('popup'))
+        <div class="alert alert-danger">
+            <ul>
+                <h1>
+                    <?php  echo session()->get('popup');
+                       echo session()->forget('popup');?>
+                </h1>
+            </ul>
+        </div>
+        @endif
         <div class="Left">
 
                <table>
@@ -80,9 +89,8 @@ Salas
                 </ul>
             </div>
             @endif
-            <div class="Subtitle">
-                <input type="submit" value="create" />
-            </div>
+<br>
+            <button class="btn waves-effect waves-light" type="submit" name="action">Create Sala</button>
 
 
 
@@ -94,7 +102,7 @@ Salas
            <table>
             <caption>Tabela de Edificios</caption>
          <thead>
-            <th id="id">@sortablelink('id')</th>
+
             <th id="Nome">@sortablelink('Nome')</th>
             <th id="Piso_Min">@sortablelink('Piso_min')</th>
             <th id="Piso_Max">@sortablelink('Piso_max')</th>
@@ -109,7 +117,7 @@ Salas
                    @forelse($edificios as $edificio)
                    <li class="list-group-item">
 <tr>
-                       <h5 class="Subtitle"><td>{{$edificio->id}} </td><td> {{$edificio->Nome}} </td><td> {{$edificio->Piso_min}}</td><td> {{$edificio->Piso_max}}</td><td> {{$edificio->Morada}}</td><td>{{$edificio->date_in}} </td><td>{{$edificio->date_out}} </td><td>   <a href="/Edificio/Update/{{  $edificio->id }}">Update</a></td><td>  <a href="/Edificio/Delete/{{  $edificio->id}}" >Delete</a></td></h5>
+                       <h5 class="Subtitle"><td> {{$edificio->Nome}} </td><td> {{$edificio->Piso_min}}</td><td> {{$edificio->Piso_max}}</td><td> {{$edificio->Morada}}</td><td>{{$edificio->date_in}} </td><td>{{$edificio->date_out}} </td><td>   <a href="/Edificio/Update/{{  $edificio->id }}">Update</a></td><td>  <a href="/Edificio/Delete/{{  $edificio->id}}" >Delete</a></td></h5>
 </tr>
                     </li>
                    @empty
@@ -121,19 +129,12 @@ Salas
 
 </tbody>
            </table>
-<a href="/AdminMain/8:8">8</a><p></p><a href="/AdminMain/16:16">16</a><p></p><a href="/AdminMain/24:24">24</a>
+
+
+
            @if(session()->get('Pagenated')==1)
            {{ $edificios->links() }}
-           @if (session()->has('popup'))
-           <div class="alert alert-danger">
-               <ul>
-                   <h1>
-                       <?php  echo session()->get('popup');
-                          echo session()->forget('popup');?>
-                   </h1>
-               </ul>
-           </div>
-           @endif
+
            @endif
 
 
@@ -167,17 +168,25 @@ Salas
                 </div>
 
                 @endif
-
+                <br>
                 <div class="Subtitle">
-                    <input type="submit" value="create" />
+                    <button class="btn waves-effect waves-light" type="submit" name="action">Create Edificio</button>
                 </div>
 
 
 
             </form>
+            <div class="row">
+                <div class="col s4"><a href="/AdminMain/8:8">8</a></div>
+                <div class="col s4"><a href="/AdminMain/16:16">16</a></div>
+                <div class="col s4"><a href="/AdminMain/24:24">24</a></div>
+
+            </div>
            </div>
 
        </div>
+
+
 
     </div>
 </div>

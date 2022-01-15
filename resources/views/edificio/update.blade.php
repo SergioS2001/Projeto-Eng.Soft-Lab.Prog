@@ -44,7 +44,9 @@ Update Edificio {{ $edificios->id }}
         <h5 class="Subtitle"><td>  <input name='Nome' type="text"></td><td>  <input name='Min_Piso' type="number"> </td><td>  <input name='Max_Piso' type="number"> </td><td> <input name='Morada' type="text"></td><td> <input name='date_in' type="time"></td><td> <input name='date_out' type="time"></td></h5>
      </tr>
  </table>
- <input type="submit">
+ <br>
+
+ <button class="btn waves-effect waves-light" type="submit" name="action">Update Edificio</button>
      </form>
      @if ($errors->any())
      <div class="alert alert-danger">

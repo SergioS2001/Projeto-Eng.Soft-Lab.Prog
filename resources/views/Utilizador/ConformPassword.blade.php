@@ -57,6 +57,7 @@ Utilizador Information
       @endif
                     <div class="Subtitle">
                     <input  type="submit"  value="Reset" />
+                    </div>
             </form>
         </div>
        </div>

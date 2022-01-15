@@ -46,7 +46,7 @@ Update Sala {{ $salas->id }}
      </tr>
  </table>
 
- <input type="submit">
+ <button class="btn waves-effect waves-light" type="submit" name="action">Update Sala</button>
      </form>
      @if ($errors->any())
      <div class="alert alert-danger">

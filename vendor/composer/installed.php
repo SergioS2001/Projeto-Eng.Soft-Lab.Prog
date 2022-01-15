@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '451726d29c71d639c83588810cffa54532ed1229',
+        'reference' => '6ad8e5886c529d0ff0be4741ae3189b730914726',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -397,6 +397,15 @@
                 0 => 'v8.78.1',
             ),
         ),
+        'itsgoingd/clockwork' => array(
+            'pretty_version' => 'v5.1.3',
+            'version' => '5.1.3.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../itsgoingd/clockwork',
+            'aliases' => array(),
+            'reference' => 'e03f8a7f4bcd99ec67e56428e4fc7424de4cefa8',
+            'dev_requirement' => false,
+        ),
         'kodova/hamcrest-php' => array(
             'dev_requirement' => true,
             'replaced' => array(
@@ -427,7 +436,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '451726d29c71d639c83588810cffa54532ed1229',
+            'reference' => '6ad8e5886c529d0ff0be4741ae3189b730914726',
             'dev_requirement' => false,
         ),
         'laravel/sail' => array(
@@ -455,6 +464,15 @@
             'install_path' => __DIR__ . '/../laravel/serializable-closure',
             'aliases' => array(),
             'reference' => '25de3be1bca1b17d52ff0dc02b646c667ac7266c',
+            'dev_requirement' => false,
+        ),
+        'laravel/telescope' => array(
+            'pretty_version' => 'v4.7.0',
+            'version' => '4.7.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../laravel/telescope',
+            'aliases' => array(),
+            'reference' => '4c7f170e20c2303321fa857bc3acceb69a588563',
             'dev_requirement' => false,
         ),
         'laravel/tinker' => array(

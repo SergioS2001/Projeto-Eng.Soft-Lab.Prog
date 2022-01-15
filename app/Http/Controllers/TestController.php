@@ -15,6 +15,7 @@ class TestController extends Controller
 
     }
     public function LogI(){
+
         return view("logI");
 
     }

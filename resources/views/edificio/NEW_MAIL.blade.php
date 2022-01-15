@@ -10,6 +10,7 @@ EDIFICIOS CRIADADOS
 <table>
     <caption>Tabela de Edificios</caption>
  <thead>
+    <th id="ID">Id</th>
 <th id="Nome">Nome</th>
 <th id="Piso_Min">Piso_Min</th>
 <th id="Piso_Max">Piso_Max</th>

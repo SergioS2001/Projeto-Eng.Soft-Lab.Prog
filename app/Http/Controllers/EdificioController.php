@@ -7,11 +7,11 @@ use App\Models\Edificio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
-define("REMAINADMIN", "/AdminMain");
+define("REMAINADMIN5", "/AdminMain");
 use Carbon\Carbon;
 use Barryvdh\DomPDF\Facade as PDF;
-define("DATA_FORMAT","Y-m-d H:i:s");
-define("HOUR_FORMAT","H:i:s");
+define("DATA_FORMAT5","Y-m-d H:i:s");
+define("HOUR_FORMAT5","H:i:s");
 /**
  *  *  class controler Edificio
  *     usamos este controller para gerir as funções necessarias para a criação, mostrar, editar ,delete de edificios.
@@ -72,7 +72,7 @@ return redirect()->back()->withErrors('Min_Piso>Max_Piso or date_in>date_out');
 $Edificio=$this->create($request);
 $Edificio->save();
 $this->SendMAIL($request,1);
-return redirect()->back();
+return redirect()->back(303)->with('popup','Edificiocreated');
 
     }
 
@@ -126,7 +126,7 @@ if(!($ed==null ||$request->Min_Piso>$request->Max_Piso)){
 
         DB::update('update edificios  set Nome = ? , Piso_min= ? ,Piso_max= ? , Morada= ?, date_in=?, date_out=? where id = ? ',[$ed->Nome, $ed->Piso_min,$ed->Piso_max,$ed->Morada,$ed->date_in,$ed->date_out,$ed->id]);
         $this->SendMAIL($request,2);
-        return redirect(REMAINADMIN)->with('popup','Edificio Update');
+        return redirect(REMAINADMIN5,303)->with('popup','Edificio Update');
 
 
 }
@@ -190,9 +190,9 @@ public function check3($ed,$edificio){
     $SALA =DB::select('select * from requisitos e, edificios f ,salas s where f.id= ? and f.id=s.id_edificio and s.id=e.id_Sala and e.date_in > NOW()', [$edificio]);
 foreach($SALA as $sala){
     $aux2=new Carbon($sala->date_in);
-    $aux2= $aux2->format(HOUR_FORMAT);
+    $aux2= $aux2->format(HOUR_FORMAT5);
    $aux=new Carbon($sala->date_in);
-   $aux= $aux->format(HOUR_FORMAT);
+   $aux= $aux->format(HOUR_FORMAT5);
 if($aux2<$ed->date_in ||$aux>$ed->date_in ){
 return false;
 }
@@ -229,7 +229,7 @@ DB::delete('delete from salas where id = ?', [$sala->id]);
 DB::delete('delete from edificios where id = ?', [$id]);
 
 
-        return redirect()->back()->with('popup','Edificio Delected'. $id);
+        return redirect()->back(303)->with('popup','Edificio Delected'. $id);
     }
    /**
      * Handler of the mail that recebes a edificio and a mode to give the information in email and what time of email it is

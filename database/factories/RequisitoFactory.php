@@ -8,8 +8,8 @@ use App\Models\Utilizador;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
-define('HOUR_FORMAT', "H:i:s");
-define('DATA_FORMAT', "Y-m-d H:i:s");
+define('HOUR_FORMAT11', "H:i:s");
+define('DATA_FORMAT11', "Y-m-d H:i:s");
 class RequisitoFactory extends Factory
 {
     /**
@@ -32,9 +32,9 @@ class RequisitoFactory extends Factory
         $id=Sala::all()->random()->id;
         $sala = DB::table('salas')->where('id',$id)->first();
         $edificio = DB::table('edificios')->where('id',$sala->id_edificio)->first();
-        $re0=Carbon::parse($edificio->date_in)->addHour(random_int(0,2))->format(HOUR_FORMAT);
+        $re0=Carbon::parse($edificio->date_in)->addHour(random_int(0,2))->format(HOUR_FORMAT11);
         $now5=Carbon::parse(now())->addDay(5)->format('Y-m-d');
-        $n2=Carbon::parse($now5 . $re0)->format(DATA_FORMAT);
+        $n2=Carbon::parse($now5 . $re0)->format(DATA_FORMAT11);
         $re2=Carbon::parse($n2)->addHour(2);
 
         return [
